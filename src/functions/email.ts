@@ -1,4 +1,5 @@
 const { ACCESS_TOKEN, EMAIL_FROM, EMAIL_TO, MAILGUN_API_KEY, MAILGUN_DOMAIN } = process.env;
+import { APIGatewayEvent, Context, Handler } from "aws-lambda";
 import { messages } from "mailgun-js";
 import { MailOptions } from "nodemailer/lib/smtp-transport";
 
@@ -75,12 +76,13 @@ const sendEmail = (messageData: IContactFormValues): Promise<any> => {
  * @param context
  * @returns {Promise<{body: string; statusCode: number}>}
  */
-export const handler = async (event, context) => {
+export const handler: Handler = async (event: APIGatewayEvent, context: Context) => {
 	if (event.httpMethod !== "POST") {
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}
 
-	const { token, ...messageData }: IRequestData = JSON.parse(event.body);
+	const invalidToken: string = JSON.stringify({ token: "INVALID" });
+	const { token, ...messageData }: IRequestData = JSON.parse(event.body || invalidToken);
 	if (token !== ACCESS_TOKEN) {
 		return { statusCode: 401, body: "Unauthorized" };
 	}
