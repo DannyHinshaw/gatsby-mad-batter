@@ -1,0 +1,40 @@
+@import "../../style/theme";
+
+.headroom-wrapper {
+  height: 65px;
+  position: absolute;
+  width: 100%;
+
+  .headroom {
+    align-items: center;
+    //background-color: $theme-dark;
+    background-color: $lt-pink-transparent;
+    display: flex;
+    height: 65px;
+    justify-content: space-evenly;
+    position: relative;
+    z-index: 101 !important;
+
+    a {
+      background-image: none !important;
+      color: $theme-white !important;
+      font-size: .8rem;
+      height: 100%;
+      padding-top: 15.5px;
+      text-shadow: none !important;
+      transition: 0.3s ease-in-out;
+    }
+
+    a.active {
+      font-weight: bolder;
+    }
+
+    a.active, a:hover {
+      color: $theme-dark !important;
+    }
+
+    a:hover {
+      cursor: pointer;
+    }
+  }
+}

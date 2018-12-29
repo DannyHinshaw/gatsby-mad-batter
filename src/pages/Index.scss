@@ -1,0 +1,53 @@
+@import "../style/theme";
+
+%flex-header {
+  display: flex;
+  width: 100%;
+}
+
+html, body {
+  background-color: $theme-dark;
+}
+
+main {
+  .react-parallax {
+    box-shadow: $theme-shadow;
+    overflow: hidden;
+    position: relative;
+
+    img:not(#mainLogo) {
+      max-width: none !important;
+    }
+
+    // h3 positioning classes
+    .header-right-container {
+      @extend %flex-header;
+      justify-content: flex-end;
+    }
+
+    .header-center-container {
+      @extend %flex-header;
+      justify-content: center;
+    }
+
+    // Titles with border
+    h3.title {
+      border: 5px solid $theme-white;
+      margin-bottom: 1rem;
+      padding: 15px;
+      text-align: center;
+      width: 8rem;
+    }
+
+    .panel-text {
+      color: $theme-white !important;
+      padding: 2.5rem;
+      position: relative;
+      top: calc(10vh / 2);
+
+      * {
+        color: $theme-white !important;
+      }
+    }
+  }
+}

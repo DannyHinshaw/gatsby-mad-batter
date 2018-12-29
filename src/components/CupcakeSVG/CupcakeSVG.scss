@@ -1,0 +1,90 @@
+@import "../../style/theme";
+
+// SVG adapted from mermer's design (thank you!): https://codepen.io/mer-mer/pen/ALNAGr
+#cupcake-svg {
+  height: 30vh;
+  margin-top: 2rem;
+  padding: .25rem;
+  width: auto;
+
+  * {
+    z-index: 100 !important;
+  }
+
+  .path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: dash 5s linear forwards;
+  }
+
+  .line-1 {
+    animation: dash-reverse 2s linear forwards;
+  }
+
+  .line-2 {
+    animation: dash-reverse 2s 1s linear forwards;
+  }
+
+  .line-3 {
+    animation: dash 5s 2s linear forwards;
+  }
+
+  .line-4 {
+    animation: dash-reverse 2s 2s linear forwards;
+  }
+
+  .cherry {
+    animation: wiggle 1s 4s linear forwards;
+    opacity: 0;
+  }
+}
+
+@keyframes dash-reverse {
+  0% {
+    stroke-dashoffset: -50;
+  }
+  100% {
+    stroke-dashoffset: 10;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1
+  }
+  20% {
+    transform: rotate(7deg);
+    transform-origin: 50% 50%;
+  }
+  40% {
+    transform: rotate(-14deg);
+  }
+  60% {
+    transform: rotate(4deg);
+  }
+  80% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    opacity: 1
+  }
+}
+
+@media only screen and (max-width: 485px) {
+  #cupcake-svg {
+    height: 30vh;
+    margin-top: 0 !important;
+    padding: 2.5rem;
+    width: auto;
+  }
+}
