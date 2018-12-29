@@ -1,3 +1,5 @@
+import { APIGatewayEvent, Context, Handler } from "aws-lambda";
+
 const { ACCESS_TOKEN } = process.env;
 
 /**
@@ -6,7 +8,11 @@ const { ACCESS_TOKEN } = process.env;
  * @param context
  * @returns {Promise<{body: string; statusCode: number}>}
  */
-export const handler = async (event, context) => {
+export const handler: Handler = async (event: APIGatewayEvent, context: Context) => {
+	Object.keys(event.headers).forEach(key => {
+		console.log(event.headers[key]);
+	});
+
 	if (event.httpMethod !== "GET") {
 		return {
 			statusCode: 405,

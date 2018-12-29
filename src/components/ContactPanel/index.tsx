@@ -115,6 +115,7 @@ const ContactPanel = (): JSX.Element => {
 				<div id="socialLinks">
 					<a
 						href="https://www.facebook.com/madefromscratchbaking/"
+						rel="noreferrer noopener"
 						target="_blank"
 						title="Instagram"
 					>
@@ -122,6 +123,7 @@ const ContactPanel = (): JSX.Element => {
 					</a>
 					<a
 						href="https://www.instagram.com/sprinkleallthethings/"
+						rel="noreferrer noopener"
 						target="_blank"
 						title="Instagram"
 					>
@@ -140,37 +142,53 @@ const ContactPanel = (): JSX.Element => {
 									Message
 								</h3>
 
-								<label htmlFor="name">Name</label>
-								<Field type="text" name="name" placeholder="Mary Jane" />
-								<ErrorMessage className="error" name="name" component="div" />
+								<label htmlFor="name">
+									Name
+									<Field type="text" name="name" placeholder="Mary Jane" />
+									<ErrorMessage className="error" name="name" component="div" />
+								</label>
 
-								<label htmlFor="email">Email</label>
-								<Field type="email" name="email" placeholder="mary@example.com" />
-								<ErrorMessage className="error" name="email" component="div" />
+								<label htmlFor="email">
+									Email
+									<Field type="email" name="email" placeholder="mary@example.com" />
+									<ErrorMessage className="error" name="email" component="div" />
+								</label>
 
-								<label htmlFor="phone">Phone</label>
-								<Field type="phone" name="phone" placeholder="555-555-5555" />
-								<ErrorMessage className="error" name="phone" component="div" />
+								<label htmlFor="phone">
+									Phone
+									<Field type="phone" name="phone" placeholder="555-555-5555" />
+									<ErrorMessage className="error" name="phone" component="div" />
+								</label>
 
-								<label htmlFor="people">Number of People</label>
-								<Field name="people" component="select" placeholder="Number of people">
-									{numberOfPeopleOptions.map((val: string, i: number) => (
-										<option key={val} value={val}>{val}</option>
-									))}
-								</Field>
-								<ErrorMessage className="error" name="people" component="div" />
+								<label htmlFor="people">
+									Number of People
+									<br />
+									<Field name="people" component="select" placeholder="Number of people">
+										<option>Select Headcount</option>
+										{numberOfPeopleOptions.map((val: string, i: number) => (
+											<option key={val} value={val}>{val}</option>
+										))}
+									</Field>
+									<ErrorMessage className="error" name="people" component="div" />
+								</label>
 
-								<label htmlFor="date">Event Date</label>
-								<Field type="date" name="date" placeholder="" />
-								<ErrorMessage className="error" name="date" component="div" />
+								<label htmlFor="date">
+									Event Date
+									<Field type="date" name="date" placeholder="" />
+									<ErrorMessage className="error" name="date" component="div" />
+								</label>
 
-								<label htmlFor="subject">Subject</label>
-								<Field type="text" name="subject" placeholder="Ex. Birthday Cake!" />
-								<ErrorMessage className="error" name="subject" component="div" />
+								<label htmlFor="subject">
+									Subject
+									<Field type="text" name="subject" placeholder="Ex. Birthday Cake!" />
+									<ErrorMessage className="error" name="subject" component="div" />
+								</label>
 
-								<label htmlFor="message">Message</label>
-								<Field component="textarea" type="text" name="message" rows="5" />
-								<ErrorMessage className="error" name="message" component="div" />
+								<label htmlFor="message">
+									Message
+									<Field component="textarea" type="text" name="message" rows="5" />
+									<ErrorMessage className="error" name="message" component="div" />
+								</label>
 
 								{status && status.msg && <div>{status.msg}</div>}
 

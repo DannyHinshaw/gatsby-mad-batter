@@ -46,6 +46,7 @@ const constructEmailData = (messageData: IContactFormValues): SendData => {
 		subject: `New message from madbatterbake.com! Subject: ${subject}`,
 		text: `
 New message from madbatterbake.com!\n
+
 From: ${name} - ${email} - ${phone}\n
 Event Date: ${date}\n
 Number of People: ${people}\n
