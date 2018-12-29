@@ -40,7 +40,9 @@ const formatURLs = (data: IResponseData): ReactImageGalleryItem[] => {
 			effect: "sharpen",
 			gravity: "auto"
 		}),
-		thumbnail: undefined
+		originalAlt: imageData.public_id
+			.split("/")[1]
+			.replace(/-/g, " ")
 	}));
 };
 
