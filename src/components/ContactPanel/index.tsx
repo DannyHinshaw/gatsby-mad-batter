@@ -74,16 +74,6 @@ export const getInputVal = (e: Event): string | undefined => {
 };
 
 /**
- * Util function to handle form input changes.
- * @param {React.Dispatch<React.SetStateAction<string>>} updateFunc
- * @returns {(e: Event) => "" | void}
- */
-export const handleFormInputChange = (updateFunc: StateSetter) => (e: Event) => {
-	const input: string | undefined = getInputVal(e);
-	return input && updateFunc(input);
-};
-
-/**
  * Main contact form component.
  * @returns {JSX.Element}
  * @constructor
@@ -96,15 +86,14 @@ const ContactPanel = (): JSX.Element => {
 		return fetch(tokenURL)
 			.then(res => res.json())
 			.then(({ token }) => {
-				console.log("TOKEN::RESPONSE::data::", token);
 				return fetch(emailURL, {
 					method: "POST",
 					body: JSON.stringify({ token, ...values })
 				});
 			})
 			.then((data) => {
-				console.log("EMAIL::RESPONSE::data::", data);
 				actions.setSubmitting(false);
+				// TODO: Add form state handling here (remove inputs, mark success)
 			})
 			.catch(err => {
 				console.error(err);
@@ -112,16 +101,6 @@ const ContactPanel = (): JSX.Element => {
 				// actions.setErrors(transformMyRestApiErrorsToAnObject(error));
 				actions.setStatus({ msg: "An error occurred while sending message." });
 			});
-		// MyImaginaryRestApiCall(user.id, values).then(
-		// 	updatedUser => {
-		// 		actions.setSubmitting(false);
-		// 	},
-		// 	error => {
-		// 		actions.setSubmitting(false);
-		// 		actions.setErrors(transformMyRestApiErrorsToAnObject(error));
-		// 		actions.setStatus({ msg: "Set some arbitrary status or data" });
-		// 	}
-		// );
 	};
 
 	return (
@@ -210,30 +189,3 @@ const ContactPanel = (): JSX.Element => {
 };
 
 export default ContactPanel;
-
-/*
-<FormField label="Name" htmlFor="input-name">
-  <FormInput
-    autoFocus={true}
-    onChange={handleSetName}
-    type="name"
-    placeholder="Enter name"
-    name="input-name" />
-</FormField>
-<FormField label="Email address" htmlFor="input-email">
-  <FormInput onChange={handleSetEmail} type="email" placeholder="Enter email" name="input-email" />
-</FormField>
-<FormSelect options={[
-  { label: "1 - 10", value: "1 - 10" },
-  { label: "10 - 20", value: "10 - 20" },
-  { label: "20 - 30", value: "20 - 30" },
-  { label: "40 - 50", value: "40 - 50" },
-  { label: "50 - 60", value: "50 - 60" },
-  { label: "60 - 70", value: "60 - 70" },
-  { label: "70 - 80", value: "70 - 80" },
-  { label: "80 - 90", value: "80 - 90" },
-  { label: "90 - 100", value: "90 - 100" }
-]} firstOption="Select" onChange={setPeople} />
-
-<Button submit={true}>Submit</Button>
-*/
