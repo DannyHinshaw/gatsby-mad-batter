@@ -7,10 +7,6 @@ const { ACCESS_TOKEN } = process.env;
  * @returns {Promise<{body: string; statusCode: number}>}
  */
 export const handler = async (event, context) => {
-	console.log("Event::\n", event);
-	console.log("Context::\n", context);
-
-	// Only allow GET
 	if (event.httpMethod !== "GET") {
 		return {
 			statusCode: 405,
