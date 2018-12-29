@@ -10,7 +10,7 @@ const { ACCESS_TOKEN } = process.env;
  */
 export const handler: Handler = async (event: APIGatewayEvent, context: Context) => {
 	Object.keys(event.headers).forEach(key => {
-		console.log(event.headers[key]);
+		console.log(key, event.headers[key]);
 	});
 
 	if (event.httpMethod !== "GET") {

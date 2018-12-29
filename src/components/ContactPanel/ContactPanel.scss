@@ -11,9 +11,14 @@ div[name="contact"] {
         margin-top: 0;
       }
 
-      .social {
-        font-size: 2rem;
-        margin: 0 8px 12px 8px;
+      #socialLinks {
+        a {
+          background-image: none !important;
+        }
+        .social {
+          font-size: 2rem;
+          margin: 0 8px 12px 8px;
+        }
       }
 
       #contactFormContainer {
@@ -107,7 +112,7 @@ div[name="contact"] {
           }
 
           input[type="date"] {
-            width: 8rem;
+            width: 12rem;
           }
 
           // Adapted from: https://codepen.io/raubaca/pen/VejpQP
@@ -128,7 +133,7 @@ div[name="contact"] {
           }
 
           select {
-            width: 8rem;
+            width: 12rem;
             height: 1.2rem;
             margin: 0;
             padding: 0 0 0 .5em;

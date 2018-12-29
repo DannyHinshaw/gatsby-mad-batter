@@ -1,12 +1,10 @@
 import { ErrorMessage, Field, Form, Formik, FormikActions } from "formik";
 import * as React from "react";
-import { Dispatch, SetStateAction } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import * as Yup from "yup";
 import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
 
-export type StateSetter = Dispatch<SetStateAction<any>>;
 const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
 const emailURL: string = functionsBaseURL.concat("email");
@@ -85,21 +83,17 @@ const ContactPanel = (): JSX.Element => {
 		actions.setSubmitting(true);
 		return fetch(tokenURL)
 			.then(res => res.json())
-			.then(({ token }) => {
-				return fetch(emailURL, {
-					method: "POST",
-					body: JSON.stringify({ token, ...values })
-				});
-			})
-			.then((data) => {
+			.then(({ token }) => fetch(emailURL, {
+				method: "POST",
+				body: JSON.stringify({ token, ...values })
+			})).then((data) => {
 				actions.setSubmitting(false);
-				// TODO: Add form state handling here (remove inputs, mark success)
-			})
-			.catch(err => {
+				actions.resetForm();
+				actions.setStatus({ msg: "Message successfully sent!" });
+			}).catch(err => {
 				console.error(err);
 				actions.setSubmitting(false);
-				// actions.setErrors(transformMyRestApiErrorsToAnObject(error));
-				actions.setStatus({ msg: "An error occurred while sending message." });
+				actions.setErrors({ message: "An error occurred while sending message" });
 			});
 	};
 

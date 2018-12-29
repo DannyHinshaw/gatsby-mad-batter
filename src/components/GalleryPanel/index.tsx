@@ -2,6 +2,7 @@ import * as cloudinary from "cloudinary-core";
 import * as React from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import { Parallax } from "react-parallax";
+import { clientIsChrome } from "../../utils/client";
 import ParallaxPanel from "../ParallaxPanel";
 import "./GalleryPanel.scss";
 
@@ -33,8 +34,12 @@ const cl = new cloudinary.Cloudinary({ cloud_name: "nulleffort", secure: true })
  */
 const formatURLs = (data: IResponseData): ReactImageGalleryItem[] => {
 	const { resources } = data;
+	const imageExtension: string = clientIsChrome() ? ".webp" : ".jpc";
 	return resources.map((imageData: IImageResourceData) => ({
-		original: cl.url(imageData.public_id, { effect: "sharpen", gravity: "auto" }),
+		original: cl.url(imageData.public_id.concat(imageExtension), {
+			effect: "sharpen",
+			gravity: "auto"
+		}),
 		thumbnail: undefined
 	}));
 };
