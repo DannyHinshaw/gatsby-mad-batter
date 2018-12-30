@@ -1,4 +1,5 @@
 import { APIGatewayEvent, Context, Handler } from "aws-lambda";
+import { logInfo } from "./index";
 
 interface IHeaders {
 	[name: string]: string
@@ -36,6 +37,7 @@ const isValidReferer = (event: APIGatewayEvent) => {
 export const handler: Handler = async (event: APIGatewayEvent, context: Context) => {
 	// Only allow GET requests
 	if (event.httpMethod !== "GET") {
+		logInfo(405, event, context);
 		return {
 			statusCode: 405,
 			body: "Method Not Allowed"
@@ -44,12 +46,14 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 
 	// Only allow requests from website
 	if (!isValidReferer(event)) {
+		logInfo(401, event, context);
 		return {
 			statusCode: 401,
 			body: "Invalid referer"
 		};
 	}
 
+	logInfo(200, event, context);
 	return {
 		statusCode: 200,
 		body: JSON.stringify({

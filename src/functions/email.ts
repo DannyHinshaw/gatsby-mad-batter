@@ -2,6 +2,7 @@ const { ACCESS_TOKEN, EMAIL_FROM, EMAIL_TO, MAILGUN_API_KEY, MAILGUN_DOMAIN } = 
 import { APIGatewayEvent, Context, Handler } from "aws-lambda";
 import { messages } from "mailgun-js";
 import { MailOptions } from "nodemailer/lib/smtp-transport";
+import { logInfo } from "./index";
 
 type SendData = messages.SendData;
 type SendResponse = messages.SendResponse;
@@ -66,6 +67,7 @@ const sendEmail = (messageData: IContactFormValues): Promise<any> => {
 	const mailData: SendData = constructEmailData(messageData);
 	return mailgun.messages().send(mailData)
 		.then((t: SendResponse) => {
+			console.log(200, "Email sent successfully.");
 			return { success: 200, message: "Email sent" };
 		}).catch(console.error);
 };
@@ -78,12 +80,14 @@ const sendEmail = (messageData: IContactFormValues): Promise<any> => {
  */
 export const handler: Handler = async (event: APIGatewayEvent, context: Context) => {
 	if (event.httpMethod !== "POST") {
+		logInfo(405, event, context);
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}
 
 	const invalidToken: string = JSON.stringify({ token: "INVALID" });
 	const { token, ...messageData }: IRequestData = JSON.parse(event.body || invalidToken);
 	if (token !== ACCESS_TOKEN) {
+		logInfo(401, event, context);
 		return { statusCode: 401, body: "Unauthorized" };
 	}
 
@@ -91,17 +95,23 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 	const discrepantKeys: boolean = bodyKeys.some(k => !keys.includes(k));
 	const hasAllKeys: boolean = bodyKeys.every(k => keys.includes(k));
 	if (discrepantKeys || !hasAllKeys) {
+		logInfo(422, event, context);
 		return { statusCode: 422, body: "Unprocessable Entity" };
 	}
 
 	return sendEmail(messageData)
 		.then((res) => {
+			logInfo(200, event, context);
+
 			return {
 				statusCode: 200,
 				body: JSON.stringify(res)
 			};
 		}).catch(err => {
 			const formattedError = JSON.stringify(err, null, 2);
+			logInfo(500, event, context);
+			console.error(err);
+
 			return {
 				statusCode: 500,
 				body: formattedError
