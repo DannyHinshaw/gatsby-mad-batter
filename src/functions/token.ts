@@ -1,5 +1,5 @@
 import { APIGatewayEvent, Context, Handler } from "aws-lambda";
-import { logInfo } from "./index";
+import { logInfo } from "./util";
 
 interface IHeaders {
 	[name: string]: string

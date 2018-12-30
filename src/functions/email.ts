@@ -2,7 +2,7 @@ const { ACCESS_TOKEN, EMAIL_FROM, EMAIL_TO, MAILGUN_API_KEY, MAILGUN_DOMAIN } = 
 import { APIGatewayEvent, Context, Handler } from "aws-lambda";
 import { messages } from "mailgun-js";
 import { MailOptions } from "nodemailer/lib/smtp-transport";
-import { logInfo } from "./index";
+import { logInfo } from "./util";
 
 type SendData = messages.SendData;
 type SendResponse = messages.SendResponse;
