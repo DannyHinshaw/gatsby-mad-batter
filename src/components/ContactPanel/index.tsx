@@ -102,6 +102,8 @@ const ContactPanel = (): JSX.Element => {
 	const forceUpdate = useForceUpdate();
 
 	const handleInputChange = (e: any, { name, value }: any) => {
+		console.log("CALLED");
+		console.log(name, value);
 		if (formData.hasOwnProperty(name)) {
 			setFormData({ ...formData, [name]: value });
 			console.log(formData);
@@ -252,12 +254,14 @@ const ContactPanel = (): JSX.Element => {
 							<Form.Radio
 								label="Yes"
 								value="Yes"
+								name="glutenFree"
 								checked={formData.glutenFree === "Yes"}
 								onChange={handleInputChange}
 							/>
 							<Form.Radio
 								label="No"
 								value="No"
+								name="glutenFree"
 								checked={formData.glutenFree === "No"}
 								onChange={handleInputChange}
 							/>
