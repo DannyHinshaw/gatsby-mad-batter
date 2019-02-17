@@ -1,13 +1,11 @@
-import { ErrorMessage, Field, Form, Formik, FormikActions } from "formik";
 import * as React from "react";
+import { FormEvent, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import * as Yup from "yup";
+import DateInput from "semantic-ui-calendar-react/dist/inputs/DateInput";
+import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
+import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
-
-const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
-const tokenURL: string = functionsBaseURL.concat("token");
-const emailURL: string = functionsBaseURL.concat("email");
 
 interface IContactFormValues {
 	date: string
@@ -15,41 +13,49 @@ interface IContactFormValues {
 	email: string
 	phone: string
 	people: string
+	zip: string
 	subject: string
 	message: string
 }
 
-const REQUIRED = "Required*";
-const initialValues: IContactFormValues = {
+interface IContactFormErrors {
+	dateError: boolean
+	nameError: boolean
+	emailError: boolean
+	phoneError: boolean
+	peopleError: boolean
+	zipError: boolean
+	subjectError: boolean
+	messageError: boolean
+}
+
+const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
+const tokenURL: string = functionsBaseURL.concat("token");
+const emailURL: string = functionsBaseURL.concat("email");
+
+const initialFormValues: IContactFormValues = {
 	date: "",
 	name: "",
 	email: "",
 	phone: "",
 	people: "",
+	zip: "",
 	subject: "",
 	message: ""
 };
 
-const validationSchema = Yup.object().shape({
-	date: Yup.string()
-		.required(REQUIRED),
-	name: Yup.string()
-		.test("len", "Name must be at least one letter", s => s && s.length)
-		.required(REQUIRED),
-	email: Yup.string()
-		.email()
-		.required(REQUIRED),
-	phone: Yup.string()
-		.required(REQUIRED),
-	people: Yup.string()
-		.required(REQUIRED),
-	subject: Yup.string()
-		.required(REQUIRED),
-	message: Yup.string()
-		.required(REQUIRED)
-});
+const initialFormErrors: IContactFormErrors = {
+	dateError: false,
+	nameError: false,
+	emailError: false,
+	phoneError: false,
+	peopleError: false,
+	zipError: false,
+	subjectError: false,
+	messageError: false
+};
 
-const numberOfPeopleOptions: string[] = [
+const numberOfPeopleOptions: DropdownItemProps[] = [
 	"1 - 10",
 	"10 - 20",
 	"20 - 30",
@@ -59,16 +65,23 @@ const numberOfPeopleOptions: string[] = [
 	"70 - 80",
 	"80 - 90",
 	"90 - 100"
-];
+].map((v: string) => ({ key: v, value: v, text: v }));
 
 /**
- * Wrapper for extracting input element values.
- * @param {Event} e
- * @returns {string | undefined}
+ * Check email is valid.
+ * @param {string} email
+ * @returns {boolean}
  */
-export const getInputVal = (e: Event): string | undefined => {
-	const target = e.target as HTMLInputElement;
-	return target && target.value;
+const isValidEmail = (email: string): boolean =>
+	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+
+/**
+ * Util function to force component rerender.
+ * @returns {() => void}
+ */
+const useForceUpdate = () => {
+	const [value, set] = useState(true);
+	return () => set(!value);
 };
 
 /**
@@ -78,23 +91,80 @@ export const getInputVal = (e: Event): string | undefined => {
  */
 const ContactPanel = (): JSX.Element => {
 
+	const [formErrors, setFormErrors] = useState(initialFormErrors);
+	const [formData, setFormData] = useState(initialFormValues);
+	const [loading, setLoading] = useState(false);
+	const [success, setSuccess] = useState(true);
+	const [error, setError] = useState(true);
+	const forceUpdate = useForceUpdate();
+
+	const handleInputChange = (e: any, { name, value }: any) => {
+		if (formData.hasOwnProperty(name)) {
+			setFormData({ ...formData, [name]: value });
+			console.log(formData);
+		}
+	};
+
 	// Form submission
-	const submit = (values: IContactFormValues, actions: FormikActions<IContactFormValues>) => {
-		actions.setSubmitting(true);
-		return fetch(tokenURL)
-			.then(res => res.json())
-			.then(({ token }) => fetch(emailURL, {
-				method: "POST",
-				body: JSON.stringify({ token, ...values })
-			})).then((data) => {
-				actions.setSubmitting(false);
-				actions.resetForm();
-				actions.setStatus({ msg: "Message successfully sent!" });
-			}).catch(err => {
-				console.error(err);
-				actions.setSubmitting(false);
-				actions.setErrors({ message: "An error occurred while sending message" });
-			});
+	// @ts-ignore
+	const submit = (event: FormEvent, data: FormProps) => {
+		Object.keys(initialFormErrors).forEach((k: string) => initialFormErrors[k] = false);
+		setFormErrors(initialFormErrors);
+		setLoading(true);
+
+		const { name, email, phone, zip, people, date, subject, message } = formData;
+		console.log("isValidEmail::", isValidEmail(email));
+		if (!name || name.length < 2) {
+			initialFormErrors.nameError = true;
+		}
+		if (!email || !isValidEmail(email)) {
+			initialFormErrors.emailError = true;
+		}
+		// @ts-ignore
+		if (!phone || phone.match(/\d/g).length !== 10) {
+			initialFormErrors.phoneError = true;
+		}
+		// @ts-ignore
+		if (!zip || zip.match(/\d/g).length < 5) {
+			initialFormErrors.zipError = true;
+		}
+		if (!people) {
+			initialFormErrors.peopleError = true;
+		}
+		if (!date) {
+			initialFormErrors.dateError = true;
+		}
+		if (!subject) {
+			initialFormErrors.subjectError = true;
+		}
+		if (!message) {
+			initialFormErrors.messageError = true;
+		}
+
+		setFormErrors(initialFormErrors);
+		const errors: boolean = Object.keys(formErrors).some((k: string) => formErrors[k]);
+		if (errors) {
+			setLoading(false);
+
+			// Force a rerender to finish validation errors
+			// Needed for SUI onChange bug
+			return forceUpdate();
+		}
+
+		// return fetch(tokenURL)
+		// 	.then(res => res.json())
+		// .then(({ token }) => fetch(emailURL, {
+		// 	method: "POST",
+		// 	body: JSON.stringify({ token, ...values })
+		// })).then((data) => {
+		// 	actions.setSubmitting(false);
+		// 	actions.resetForm();
+		// 	actions.setStatus({ msg: "Message successfully sent!" });
+		// }).catch(err => {
+		// 	console.error(err);
+		// 	setLoading(false);
+		// 	setError(false);
+		// });
 	};
 
 	return (
@@ -125,75 +195,127 @@ const ContactPanel = (): JSX.Element => {
 					</a>
 				</div>
 
-				<div id="contactFormContainer">
-					<Formik
-						initialValues={initialValues}
-						validationSchema={validationSchema}
+				<div id="semanticForm">
+					<Form
+						loading={loading}
 						onSubmit={submit}
-						render={({ errors, status, touched, isSubmitting }) => (
-							<Form>
-								<h3 style={{ textAlign: "center" }}>
-									Message
-								</h3>
+					>
+						<h3 style={{ textAlign: "center" }}>
+							Message
+						</h3>
 
-								<label htmlFor="name">
-									Name
-									<Field type="text" name="name" placeholder="Mary Jane" />
-									<ErrorMessage className="error" name="name" component="div" />
-								</label>
+						<p style={{ fontSize: ".7rem" }}>
+							Required Fields *
+						</p>
 
-								<label htmlFor="email">
-									Email
-									<Field type="email" name="email" placeholder="mary@example.com" />
-									<ErrorMessage className="error" name="email" component="div" />
-								</label>
+						<Form.Input
+							fluid={true}
+							name="name"
+							label="Name*"
+							placeholder="Mary Jane"
+							value={formData.name}
+							onChange={handleInputChange}
+							error={formErrors.nameError}
+						/>
+						<Form.Input
+							fluid={true}
+							name="email"
+							value={formData.email}
+							onChange={handleInputChange}
+							label="Email*"
+							placeholder="mary@example.com"
+							error={formErrors.emailError}
+						/>
+						<Form.Input
+							fluid={true}
+							name="phone"
+							value={formData.phone}
+							onChange={handleInputChange}
+							label="Phone*"
+							placeholder="555-555-5555"
+							error={formErrors.phoneError}
+						/>
+						<Form.Input
+							fluid={true}
+							name="zip"
+							value={formData.zip}
+							onChange={handleInputChange}
+							label="Event Zip Code*"
+							placeholder="29045"
+							error={formErrors.zipError}
+						/>
+						<Form.Dropdown
+							name="people"
+							value={formData.people}
+							onChange={handleInputChange}
+							label="Number of People*"
+							placeholder="Head Count"
+							selection={true}
+							options={numberOfPeopleOptions}
+							error={formErrors.peopleError}
+						/>
+						<Form.Field>
+							<label>Event Date*</label>
+							<DateInput
+								name="date"
+								dateFormat="MM-DD-YYYY"
+								placeholder="Date"
+								value={formData.date}
+								iconPosition="left"
+								onChange={handleInputChange}
+								error={formErrors.dateError}
+							/>
+						</Form.Field>
+						<Form.Input
+							fluid={true}
+							name="subject"
+							id="subjectInput"
+							value={formData.subject}
+							onChange={handleInputChange}
+							label="Subject*"
+							placeholder="Ex. Birthday Cake!"
+							error={formErrors.subjectError}
+						/>
+						<Form.TextArea
+							name="message"
+							value={formData.message}
+							onChange={handleInputChange}
+							label="Message*"
+							placeholder="Tell us more about your order..."
+							error={formErrors.messageError}
+						/>
 
-								<label htmlFor="phone">
-									Phone
-									<Field type="phone" name="phone" placeholder="555-555-5555" />
-									<ErrorMessage className="error" name="phone" component="div" />
-								</label>
+						<Message
+							success={success}
+							header="Message sent!"
+							style={{ backgroundColor: "#a3f5a3" }}
+							content="Thanks for reaching out, you will hear back from us soon!"
+						/>
+						<Message
+							error={error}
+							header="Error"
+							style={{ backgroundColor: "#f55969" }}
+							content="Oops, something went wrong. Please try again later."
+						/>
 
-								<label htmlFor="people">
-									Number of People
-									<br />
-									<Field name="people" component="select" placeholder="Number of people">
-										<option>Select Headcount</option>
-										{numberOfPeopleOptions.map((val: string, i: number) => (
-											<option key={val} value={val}>{val}</option>
-										))}
-									</Field>
-									<ErrorMessage className="error" name="people" component="div" />
-								</label>
+						<div style={{ textAlign: "center" }}>
+							<Form.Button
+								disabled={
+									!formData.message ||
+									!formData.subject ||
+									!formData.people ||
+									!formData.name ||
+									!formData.zip ||
+									!formData.phone ||
+									!formData.email ||
+									!formData.date
+								}
+							>
+								Submit
+							</Form.Button>
+						</div>
 
-								<label htmlFor="date">
-									Event Date
-									<Field type="date" name="date" placeholder="" />
-									<ErrorMessage className="error" name="date" component="div" />
-								</label>
-
-								<label htmlFor="subject">
-									Subject
-									<Field type="text" name="subject" placeholder="Ex. Birthday Cake!" />
-									<ErrorMessage className="error" name="subject" component="div" />
-								</label>
-
-								<label htmlFor="message">
-									Message
-									<Field component="textarea" type="text" name="message" rows="5" />
-									<ErrorMessage className="error" name="message" component="div" />
-								</label>
-
-								{status && status.msg && <div>{status.msg}</div>}
-
-								<div style={{ textAlign: "center" }}>
-									<button type="submit" disabled={isSubmitting}>
-										Submit
-									</button>
-								</div>
-							</Form>
-						)}
-					/>
+					</Form>
 				</div>
 			</div>
 		</ParallaxPanel>

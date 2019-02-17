@@ -1,6 +1,7 @@
 import * as React from "react";
 import { CSSProperties } from "react";
 import { Parallax } from "react-parallax";
+import "semantic-ui-css/semantic.min.css";
 import AboutPanel from "../components/AboutPanel";
 import ContactPanel from "../components/ContactPanel";
 import GalleryPanel from "../components/GalleryPanel";

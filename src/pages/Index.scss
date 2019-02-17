@@ -9,6 +9,10 @@ html, body {
   background-color: $theme-dark;
 }
 
+body {
+  overflow-x: initial;
+}
+
 main {
   .react-parallax {
     box-shadow: $theme-shadow;
