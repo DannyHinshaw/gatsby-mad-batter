@@ -27,6 +27,7 @@ const keys: string[] = [
 	"email",
 	"phone",
 	"people",
+	"zip",
 	"subject",
 	"message"
 ];
