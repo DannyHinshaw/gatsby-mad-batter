@@ -8,25 +8,27 @@ import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
 
 interface IContactFormValues {
+	zip: string
 	date: string
 	name: string
 	email: string
 	phone: string
 	people: string
-	zip: string
 	subject: string
 	message: string
+	glutenFree: string
 }
 
 interface IContactFormErrors {
+	zipError: boolean
 	dateError: boolean
 	nameError: boolean
 	emailError: boolean
 	phoneError: boolean
 	peopleError: boolean
-	zipError: boolean
 	subjectError: boolean
 	messageError: boolean
+	glutenFreeError: boolean
 }
 
 const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
@@ -34,25 +36,27 @@ const tokenURL: string = functionsBaseURL.concat("token");
 const emailURL: string = functionsBaseURL.concat("email");
 
 const initialFormValues: IContactFormValues = {
+	zip: "",
 	date: "",
 	name: "",
 	email: "",
 	phone: "",
 	people: "",
-	zip: "",
 	subject: "",
-	message: ""
+	message: "",
+	glutenFree: "No"
 };
 
 const initialFormErrors: IContactFormErrors = {
+	zipError: false,
 	dateError: false,
 	nameError: false,
 	emailError: false,
 	phoneError: false,
 	peopleError: false,
-	zipError: false,
 	subjectError: false,
-	messageError: false
+	messageError: false,
+	glutenFreeError: false
 };
 
 const numberOfPeopleOptions: DropdownItemProps[] = [
@@ -243,6 +247,21 @@ const ContactPanel = (): JSX.Element => {
 							placeholder="29045"
 							error={formErrors.zipError}
 						/>
+						<Form.Group grouped={true}>
+							<label>Gluten Free</label>
+							<Form.Radio
+								label="Yes"
+								value="Yes"
+								checked={formData.glutenFree === "Yes"}
+								onChange={handleInputChange}
+							/>
+							<Form.Radio
+								label="No"
+								value="No"
+								checked={formData.glutenFree === "No"}
+								onChange={handleInputChange}
+							/>
+						</Form.Group>
 						<Form.Dropdown
 							name="people"
 							value={formData.people}

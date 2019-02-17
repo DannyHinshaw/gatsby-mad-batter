@@ -8,6 +8,7 @@ type SendData = messages.SendData;
 type SendResponse = messages.SendResponse;
 
 interface IContactFormValues {
+	zip: string
 	date: string
 	name: string
 	email: string
@@ -15,6 +16,7 @@ interface IContactFormValues {
 	people: string
 	subject: string
 	message: string
+	glutenFree: string
 }
 
 interface IRequestData extends IContactFormValues {
@@ -22,14 +24,15 @@ interface IRequestData extends IContactFormValues {
 }
 
 const keys: string[] = [
+	"zip",
 	"date",
 	"name",
 	"email",
 	"phone",
 	"people",
-	"zip",
 	"subject",
-	"message"
+	"message",
+	"glutenFree"
 ];
 
 // Email cron constants
@@ -42,7 +45,7 @@ const mailgun = require("mailgun-js")({ apiKey: MAILGUN_API_KEY, domain: MAILGUN
  * @returns {MailOptions}
  */
 const constructEmailData = (messageData: IContactFormValues): SendData => {
-	const { date, name, email, phone, people, subject, message } = messageData;
+	const { date, name, email, glutenFree, phone, people, subject, message, zip } = messageData;
 	return {
 		to: EMAIL_TO as string,
 		from: EMAIL_FROM,
@@ -52,6 +55,8 @@ New message from madbatterbake.com!\n
 
 From: ${name} - ${email} - ${phone}\n
 Event Date: ${date}\n
+Event Zip Code: ${zip}\n
+Gluten Free: ${glutenFree}\n
 Number of People: ${people}\n
 Message: \n${message}\n
 
