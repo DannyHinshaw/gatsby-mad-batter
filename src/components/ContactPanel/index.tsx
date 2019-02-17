@@ -90,7 +90,6 @@ const useForceUpdate = () => {
  * @constructor
  */
 const ContactPanel = (): JSX.Element => {
-
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
 	const [formData, setFormData] = useState(initialFormValues);
 	const [loading, setLoading] = useState(false);
@@ -151,20 +150,20 @@ const ContactPanel = (): JSX.Element => {
 			return forceUpdate();
 		}
 
-		// return fetch(tokenURL)
-		// 	.then(res => res.json())
-		// .then(({ token }) => fetch(emailURL, {
-		// 	method: "POST",
-		// 	body: JSON.stringify({ token, ...values })
-		// })).then((data) => {
-		// 	actions.setSubmitting(false);
-		// 	actions.resetForm();
-		// 	actions.setStatus({ msg: "Message successfully sent!" });
-		// }).catch(err => {
-		// 	console.error(err);
-		// 	setLoading(false);
-		// 	setError(false);
-		// });
+		return fetch(tokenURL)
+			.then(res => res.json())
+			.then(({ token }) => fetch(emailURL, {
+				method: "POST",
+				body: JSON.stringify({ token, ...formData })
+			})).then(() => {
+				setLoading(false);
+				setSuccess(false);
+				setFormData(initialFormValues);
+			}).catch(err => {
+				console.error(err);
+				setLoading(false);
+				setError(false);
+			});
 	};
 
 	return (
