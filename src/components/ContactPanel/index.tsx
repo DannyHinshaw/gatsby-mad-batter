@@ -31,6 +31,14 @@ interface IContactFormErrors {
 	glutenFreeError: boolean
 }
 
+const BLACK_OUT_DATES: string[] = [
+	"05-23-2019",
+	"05-24-2019",
+	"05-25-2019",
+	"05-26-2019",
+	"05-27-2019",
+	"05-28-2019"
+];
 const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
 const emailURL: string = functionsBaseURL.concat("email");
@@ -250,7 +258,7 @@ const ContactPanel = (): JSX.Element => {
 							error={formErrors.zipError}
 						/>
 						<Form.Group grouped={true}>
-							<label>Gluten Free</label>
+							<label>Gluten Free?</label>
 							<Form.Radio
 								label="Yes"
 								value="Yes"
@@ -278,12 +286,17 @@ const ContactPanel = (): JSX.Element => {
 						/>
 						<Form.Field>
 							<label>Event Date*</label>
+							<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
+								Will be closed May 23 - May 28, 2019
+							</span>
 							<DateInput
 								name="date"
 								dateFormat="MM-DD-YYYY"
 								placeholder="Date"
 								value={formData.date}
 								iconPosition="left"
+								disable={BLACK_OUT_DATES}
+								popupPosition="top center"
 								onChange={handleInputChange}
 								error={formErrors.dateError}
 							/>
