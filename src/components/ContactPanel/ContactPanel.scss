@@ -3,6 +3,12 @@
 div[name="contact"] {
   .react-parallax-content {
     background-color: $pink-transparent;
+    display: flex;
+    justify-content: center;
+
+    div:first-of-type {
+      width: 100%;
+    }
 
     #contactContainer {
       text-align: center;
@@ -23,19 +29,20 @@ div[name="contact"] {
       }
 
       #semanticForm {
-
-        * {
-          color: #1d231e !important;
-        }
-
         background-color: #f5ece1;
         border-radius: 5px;
         box-shadow: $theme-shadow;
         font-size: large;
         padding: 30px;
+        margin: auto;
+        max-width: 500px;
         min-width: 250px;
         text-align: left;
         width: 100%;
+
+        * {
+          color: #1d231e !important;
+        }
 
         textarea {
           resize: none;
