@@ -34,7 +34,7 @@ const cl = new cloudinary.Cloudinary({ cloud_name: "nulleffort", secure: true })
  */
 const formatURLs = (data: IResponseData): ReactImageGalleryItem[] => {
 	const { resources } = data;
-	const imageExtension: string = clientIsChrome() ? ".webp" : ".jpc";
+	const imageExtension: string = clientIsChrome() ? ".webp" : ".jpg";
 	return resources.map((imageData: IImageResourceData) => ({
 		original: cl.url(imageData.public_id.concat(imageExtension), {
 			effect: "sharpen",
