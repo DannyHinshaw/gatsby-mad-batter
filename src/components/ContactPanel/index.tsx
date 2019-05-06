@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FormEvent, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import DateInput from "semantic-ui-calendar-react/dist/inputs/DateInput";
+import DateInput from "semantic-ui-calendar-react/dist/commonjs/inputs/DateInput";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import ParallaxPanel from "../ParallaxPanel";
@@ -32,12 +32,34 @@ interface IContactFormErrors {
 }
 
 const BLACK_OUT_DATES: string[] = [
+	"05-06-2019",
+	"05-07-2019",
+	"05-08-2019",
+	"05-09-2019",
+	"05-11-2019",
+	"05-12-2019",
+	"05-13-2019",
+	"05-14-2019",
+
 	"05-23-2019",
 	"05-24-2019",
 	"05-25-2019",
 	"05-26-2019",
 	"05-27-2019",
-	"05-28-2019"
+	"05-28-2019",
+
+	"06-05-2019",
+	"06-06-2019",
+	"06-07-2019",
+	"06-08-2019",
+	"06-09-2019",
+
+	"07-05-2019",
+	"07-06-2019",
+	"07-07-2019",
+
+	"11-29-2019",
+	"11-30-2019"
 ];
 const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
@@ -126,7 +148,6 @@ const ContactPanel = (): JSX.Element => {
 		setLoading(true);
 
 		const { name, email, phone, zip, people, date, subject, message } = formData;
-		console.log("isValidEmail::", isValidEmail(email));
 		if (!name || name.length < 2) {
 			initialFormErrors.nameError = true;
 		}
@@ -287,7 +308,7 @@ const ContactPanel = (): JSX.Element => {
 						<Form.Field>
 							<label>Event Date*</label>
 							<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
-								Will be closed May 23 - May 28, 2019
+								*Blocked out dates on the calendar are already booked*
 							</span>
 							<DateInput
 								name="date"
