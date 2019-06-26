@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Parallax } from "react-parallax";
 import { CupcakeSVG } from "../CupcakeSVG";
 import ParallaxPanel from "../ParallaxPanel";
 import "./AboutPanel.scss";
