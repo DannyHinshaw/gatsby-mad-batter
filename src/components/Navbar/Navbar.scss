@@ -18,11 +18,11 @@
     a {
       background-image: none !important;
       color: $theme-white !important;
-      font-size: .8rem;
-      height: 100%;
-      padding-top: 15.5px;
+      padding-top: calc(15.5px + 1.5%);
       text-shadow: none !important;
       transition: 0.3s ease-in-out;
+      font-size: .8rem;
+      height: 100%;
     }
 
     a.active {
