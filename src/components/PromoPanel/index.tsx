@@ -1,31 +1,62 @@
 import * as React from "react";
-import { CupcakeSVG } from "../CupcakeSVG";
 import ParallaxPanel from "../ParallaxPanel";
 import "./PromoPanel.scss";
 
+
 const PromoPanel = (): JSX.Element => {
 	return (
-		<ParallaxPanel scrollId="about" pHeight="100vh">
+		<ParallaxPanel scrollId="promo">
 			<>
 				<div id="promoText" className="panel-text">
-					<h3 className="title">
-						PROMOS & SPECIALS
-					</h3>
-
-					<div style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
-						Mad Batter Cupcakery is a bake-to-order, online bakery based out of Elgin, SC that delivers straight
-						to your door. We’re happy to supply you with a six pack of cupcakes for that simple chocolate craving, or a
-						full table of assorted baked goods for that loved one’s birthday. As far as decorating goes,
-						the possibilities are endless with both buttercream and fondant as options.
-						Dietary restrictions? Not an issue! MBC is knowledgeable in Gluten-Free and Vegan baking!
-					</div>
-					<div style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
-						Look fresh in Mad Batter gear! T-shirt  
+					<div className="title-container">
+						<h3 className="title">
+							PROMOS & SPECIALS
+						</h3>
 					</div>
 
-				</div>
-				<div id="cupcakeContainer">
-					<CupcakeSVG />
+					<div id="special" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
+						<h1>4th OF JULY SPECIAL</h1>
+						<br />
+						<p>
+							<strong>What:</strong> 8" layer cake (your choice of chocolate, vanilla, or red velvet), decorated with
+							red/white/blue
+						</p>
+
+						<p>
+							<strong>When:</strong> for delivery July 3rd (10am-3pm) and July 4th, (8am-1pm)
+						</p>
+
+						<p>
+							<strong>How Much:</strong> $35 (delivery not included)
+						</p>
+
+						<p>
+							Contact me to get your order in! And of course,
+						</p>
+
+						<p>
+							I'm also still taking orders for any other goodies you may want😁
+						</p>
+					</div>
+
+					<br />
+					<hr />
+
+					<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
+						<h1>FRESH MAD BATTER TEES!</h1>
+						<img className="img-circle" src="/imgs/mbc-tee.jpg" alt="MBC-Tee" />
+						<p>
+							Variety of styles available, starting @ $21.99!
+						</p>
+
+						<p>
+							<a target="_blank" href="https://www.bonfire.com/mad-batter-cupcakery-shirts/">
+								To shop click here!
+							</a>
+						</p>
+
+					</div>
+
 				</div>
 			</>
 		</ParallaxPanel>

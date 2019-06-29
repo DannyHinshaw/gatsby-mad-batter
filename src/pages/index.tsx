@@ -1,12 +1,12 @@
 import * as React from "react";
 import { CSSProperties } from "react";
-import { Parallax } from "react-parallax";
 import "semantic-ui-css/semantic.min.css";
 import AboutPanel from "../components/AboutPanel";
 import ContactPanel from "../components/ContactPanel";
 import GalleryPanel from "../components/GalleryPanel";
 import MainPanel from "../components/MainPanel";
 import Navbar from "../components/Navbar";
+import PromoPanel from "../components/PromoPanel";
 import SEO from "../components/SEO";
 import TestimonialPanel from "../components/TestimonialsPanel";
 import "./Index.scss";
@@ -49,6 +49,7 @@ export class Index extends React.Component<IndexPageProps> {
 				<main>
 					<Navbar />
 					<MainPanel />
+					<PromoPanel />
 					<AboutPanel />
 					<TestimonialPanel />
 					<GalleryPanel />

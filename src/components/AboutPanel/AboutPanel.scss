@@ -5,7 +5,11 @@ div[name="about"] {
 
   #aboutText {
     max-width: 1000px;
-    margin: auto;
+    padding: 3rem 5rem;
+
+    div {
+      margin: 3rem auto auto auto;
+    }
   }
 
   #cupcakeContainer {
