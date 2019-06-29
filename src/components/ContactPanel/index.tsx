@@ -1,3 +1,6 @@
+if (!window) {
+	throw Error("NO WINDOW");
+}
 import * as React from "react";
 import { FormEvent, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
