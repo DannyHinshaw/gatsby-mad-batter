@@ -115,7 +115,7 @@ const TestimonialPanel = (): JSX.Element => (
 	<ParallaxPanel scrollId="testimonial" bgImage="imgs/pumpkin_pie.jpg" pHeight="100vh">
 		<div id="testimonialText" className="panel-text">
 			<div className="header-center-container">
-				<h3 className="title" style={{ width: "13rem" }}>
+				<h3 className="title" style={{ width: "25rem" }}>
 					TESTIMONIALS
 				</h3>
 			</div>

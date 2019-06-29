@@ -23,8 +23,8 @@ div[name="contact"] {
         }
 
         .social {
-          font-size: 2rem;
-          margin: 0 8px 12px 8px;
+          font-size: 3rem;
+          margin: 2rem;
         }
       }
 
@@ -34,7 +34,7 @@ div[name="contact"] {
         box-shadow: $theme-shadow;
         font-size: large;
         padding: 30px;
-        margin: auto;
+        margin: auto auto 5rem auto;
         max-width: 500px;
         min-width: 250px;
         text-align: left;

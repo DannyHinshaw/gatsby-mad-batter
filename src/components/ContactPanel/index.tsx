@@ -57,6 +57,7 @@ const BLACK_OUT_DATES: string[] = [
 	"07-05-2019",
 	"07-06-2019",
 	"07-07-2019",
+	"07-13-2019",
 
 	"11-07-2019",
 	"11-08-2019",
@@ -211,7 +212,7 @@ const ContactPanel = (): JSX.Element => {
 		<ParallaxPanel scrollId="contact" bgImage="imgs/flowers-batch.jpeg" pHeight="115vh">
 			<div id="contactContainer" className="panel-text">
 				<div className="header-center-container">
-					<h3 className="title" style={{ width: "12rem" }}>
+					<h3 className="title" style={{ width: "15rem" }}>
 						CONTACT
 					</h3>
 				</div>
@@ -323,6 +324,7 @@ const ContactPanel = (): JSX.Element => {
 								value={formData.date}
 								iconPosition="left"
 								disable={BLACK_OUT_DATES}
+								hideMobileKeyboard={true}
 								popupPosition="top center"
 								onChange={handleInputChange}
 								error={formErrors.dateError}

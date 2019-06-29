@@ -79,7 +79,7 @@ div[name="testimonial"] {
           position: relative;
           z-index: 600;
           padding: 40px;
-          margin: 0;
+          margin: auto;
 
           font-size: 20px;
           font-style: italic;
@@ -91,6 +91,7 @@ div[name="testimonial"] {
             padding-left: 0;
 
             p {
+              font-size: 2rem;
               padding: 15px 25px 15px 0;
               position: relative;
               margin-bottom: 20px;

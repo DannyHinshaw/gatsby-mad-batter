@@ -37,10 +37,11 @@ main {
     // Titles with border
     h3.title {
       border: 5px solid $theme-white;
+      font-size: 2rem;
       margin-bottom: 1rem;
-      padding: 15px;
       text-align: center;
-      width: 8rem;
+      padding: 15px;
+      width: 15rem;
     }
 
     .panel-text {
