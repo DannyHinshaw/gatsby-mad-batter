@@ -1,0 +1,15 @@
+@import "../../style/theme";
+
+div[name="about"] {
+  background-color: $theme-pink !important;
+
+  #aboutText {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  #cupcakeContainer {
+    height: 30vh;
+    text-align: center;
+  }
+}
