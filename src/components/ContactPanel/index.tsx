@@ -1,9 +1,9 @@
 import * as React from "react";
 import { FormEvent, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import DateInput from "semantic-ui-calendar-react/dist/commonjs/inputs/DateInput";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
+import DateInput from "../../calendar/dist/commonjs/inputs/DateInput";
 import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
 
@@ -208,6 +208,14 @@ const ContactPanel = (): JSX.Element => {
 			});
 	};
 
+	const picker = () => {
+		// @ts-ignore
+		return <DateInput name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={formData.date} iconPosition="left"
+		                  disable={BLACK_OUT_DATES} hideMobileKeyboard={true} popupPosition="top center"
+		                  onChange={handleInputChange} error={formErrors.dateError} />;
+	};
+
+	// @ts-ignore
 	return (
 		<ParallaxPanel scrollId="contact" bgImage="imgs/flowers-batch.jpeg" pHeight="115vh">
 			<div id="contactContainer" className="panel-text">
@@ -317,18 +325,11 @@ const ContactPanel = (): JSX.Element => {
 							<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
 								*Blocked out dates on the calendar are already booked*
 							</span>
-							<DateInput
-								name="date"
-								dateFormat="MM-DD-YYYY"
-								placeholder="Date"
-								value={formData.date}
-								iconPosition="left"
-								disable={BLACK_OUT_DATES}
-								hideMobileKeyboard={true}
-								popupPosition="top center"
-								onChange={handleInputChange}
-								error={formErrors.dateError}
-							/>
+
+
+							{picker()}
+
+
 						</Form.Field>
 						<Form.Input
 							fluid={true}
