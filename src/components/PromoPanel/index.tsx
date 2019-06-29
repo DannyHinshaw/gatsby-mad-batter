@@ -23,7 +23,7 @@ const PromoPanel = (): JSX.Element => {
 						</p>
 
 						<p>
-							<strong>When:</strong> for delivery July 3rd (10am-3pm) and July 4th, (8am-1pm)
+							<strong>When:</strong> for delivery July 4th, (8am-1pm)
 						</p>
 
 						<p>
