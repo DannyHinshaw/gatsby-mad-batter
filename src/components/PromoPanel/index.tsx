@@ -14,6 +14,7 @@ const PromoPanel = (): JSX.Element => {
 						</h3>
 					</div>
 
+					{/*
 					<div id="special" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
 						<h1>4th OF JULY SPECIAL</h1>
 						<br />
@@ -41,6 +42,7 @@ const PromoPanel = (): JSX.Element => {
 
 					<br />
 					<hr />
+*/}
 
 					<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
 						<h1>FRESH MAD BATTER TEES!</h1>
@@ -56,7 +58,6 @@ const PromoPanel = (): JSX.Element => {
 						</p>
 
 					</div>
-
 				</div>
 			</>
 		</ParallaxPanel>

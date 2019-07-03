@@ -9,7 +9,6 @@ var checkMobile = function () {
 	if (!navigator) {
 		return false;
 	}
-
 	if (navigator.userAgent.match(/Android/i)
 		|| navigator.userAgent.match(/webOS/i)
 		|| navigator.userAgent.match(/iPhone/i)
