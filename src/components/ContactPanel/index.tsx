@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
+import { baseUrl, bgImageQuality } from "../../api";
 import DateInput from "../../calendar/dist/commonjs/inputs/DateInput";
 import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
@@ -215,9 +216,10 @@ const ContactPanel = (): JSX.Element => {
 		                  onChange={handleInputChange} error={formErrors.dateError} />;
 	};
 
-	// @ts-ignore
+	const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103411/mad-batter/flowers-batch-bg.jpg`;
+
 	return (
-		<ParallaxPanel scrollId="contact" bgImage="imgs/flowers-batch.jpeg" pHeight="115vh">
+		<ParallaxPanel scrollId="contact" bgImage={bgImage} pHeight="115vh">
 			<div id="contactContainer" className="panel-text">
 				<div className="header-center-container">
 					<h3 className="title" style={{ width: "15rem" }}>

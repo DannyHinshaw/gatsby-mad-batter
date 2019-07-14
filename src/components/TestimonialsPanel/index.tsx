@@ -1,5 +1,6 @@
 import * as React from "react";
 import Slider, { Settings } from "react-slick";
+import { baseUrl, bgImageQuality } from "../../api";
 import ParallaxPanel from "../ParallaxPanel";
 import "./TestimonialsPanel.scss";
 
@@ -106,13 +107,15 @@ const testimonialQuote = (testimonial: ITestimonialObj, key: number): JSX.Elemen
  */
 const generateQuote = (testimonial: ITestimonialObj, i: number) => testimonialQuote(testimonial, i);
 
+const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103620/mad-batter/pumpkin_pie.jpg`;
+
 /**
  * Testimonial panel component.
  * @returns {JSX.Element}
  * @constructor
  */
 const TestimonialPanel = (): JSX.Element => (
-	<ParallaxPanel scrollId="testimonial" bgImage="imgs/pumpkin_pie.jpg" pHeight="100vh">
+	<ParallaxPanel scrollId="testimonial" bgImage={bgImage} pHeight="100vh">
 		<div id="testimonialText" className="panel-text">
 			<div className="header-center-container">
 				<h3 className="title" style={{ width: "25rem" }}>

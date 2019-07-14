@@ -1,10 +1,10 @@
 import * as React from "react";
-import { baseUrl } from "../../api";
+import { baseUrl, bgImageQuality } from "../../api";
 import ParallaxPanel from "../ParallaxPanel";
 import "./MainPanel.scss";
 
 
-const bgImage: string = `${baseUrl}/upload/q_15,f_auto/v1561671612/mad-batter/disney_witches.jpg`;
+const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103451/mad-batter/disney_witches.jpg`;
 
 const MainPanel = (): JSX.Element => {
 	return (
