@@ -1,10 +1,10 @@
 import * as React from "react";
 import { FormEvent, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { DateInput } from "semantic-ui-calendar-react";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import { baseUrl, bgImageQuality } from "../../api";
-import DateInput from "../../calendar/dist/commonjs/inputs/DateInput";
 import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
 
@@ -140,8 +140,6 @@ const ContactPanel = (): JSX.Element => {
 	const forceUpdate = useForceUpdate();
 
 	const handleInputChange = (e: any, { name, value }: any) => {
-		console.log("CALLED");
-		console.log(name, value);
 		if (formData.hasOwnProperty(name)) {
 			setFormData({ ...formData, [name]: value });
 			console.log(formData);
