@@ -3,10 +3,10 @@ import { CSSProperties } from "react";
 import "semantic-ui-css/semantic.min.css";
 import AboutPanel from "../components/AboutPanel";
 import ContactPanel from "../components/ContactPanel";
+import FlavorsPanel from "../components/FlavorsPanel";
 import GalleryPanel from "../components/GalleryPanel";
 import MainPanel from "../components/MainPanel";
 import Navbar from "../components/Navbar";
-import PromoPanel from "../components/PromoPanel";
 import SEO from "../components/SEO";
 import TestimonialPanel from "../components/TestimonialsPanel";
 import "./Index.scss";
@@ -49,9 +49,10 @@ export class Index extends React.Component<IndexPageProps> {
 				<main>
 					<Navbar />
 					<MainPanel />
-					<PromoPanel />
+					{/*<PromoPanel />*/}
 					<AboutPanel />
 					<TestimonialPanel />
+					<FlavorsPanel />
 					<GalleryPanel />
 					<ContactPanel />
 				</main>

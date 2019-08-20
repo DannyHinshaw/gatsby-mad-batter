@@ -43,6 +43,13 @@ const BLACK_OUT_DATES: string[] = [
 	"08-17-2019",
 	"08-18-2019",
 
+	"08-20-2019",
+	"08-21-2019",
+	"08-22-2019",
+	"08-23-2019",
+	"08-24-2019",
+	"08-25-2019",
+
 	"09-01-2019",
 	"09-14-2019",
 	"09-20-2019",
@@ -109,7 +116,8 @@ const numberOfPeopleOptions: DropdownItemProps[] = [
 	"70 - 80",
 	"80 - 90",
 	"90 - 100"
-].map((v: string) => ({ key: v, value: v, text: v }));
+].map((v: string) =>
+	({ key: v, value: v, text: v }));
 
 /**
  * Check email is valid.

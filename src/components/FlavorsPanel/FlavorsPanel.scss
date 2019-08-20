@@ -1,0 +1,30 @@
+@import "../../style/theme";
+
+div[name="flavors"] {
+  background-color: $theme-light-blue !important;
+
+  #flavorsText {
+    max-width: 1000px;
+    padding: 3rem 5%;
+
+    .title {
+      margin: auto;
+    }
+
+    div {
+      margin: 3rem auto;
+    }
+
+    #flavorsGrid {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: 50% 50%;
+      line-height: 2.5rem;
+      font-size: 2rem;
+
+      div {
+        text-align: center;
+      }
+    }
+  }
+}
