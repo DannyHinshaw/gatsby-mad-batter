@@ -6,7 +6,9 @@ const FlavorsPanel = (): JSX.Element => {
 	return (
 		<ParallaxPanel scrollId="flavors" pHeight="100vh">
 			<div id="flavorsText" className="panel-text">
-				<h3 className="title">SEASONAL FLAVORS</h3>
+				<h3 className="title" style={{ width: "23rem" }}>
+					SEASONAL FLAVORS
+				</h3>
 				<div id="flavorsGrid">
 					<div>Vanilla</div>
 					<div>Chocolate</div>
