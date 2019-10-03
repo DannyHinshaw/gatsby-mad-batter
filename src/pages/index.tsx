@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CSSProperties } from "react";
+import { Provider } from "react-redux";
 import "semantic-ui-css/semantic.min.css";
 import AboutPanel from "../components/AboutPanel";
 import ContactPanel from "../components/ContactPanel";
@@ -9,6 +10,7 @@ import MainPanel from "../components/MainPanel";
 import Navbar from "../components/Navbar";
 import SEO from "../components/SEO";
 import TestimonialPanel from "../components/TestimonialsPanel";
+import { store } from "../store";
 import "./Index.scss";
 
 interface IndexPageProps {
@@ -44,7 +46,7 @@ export class Index extends React.Component<IndexPageProps> {
 
 	public render() {
 		return (
-			<>
+			<Provider store={store}>
 				<SEO />
 				<main>
 					<Navbar />
@@ -56,7 +58,7 @@ export class Index extends React.Component<IndexPageProps> {
 					<GalleryPanel />
 					<ContactPanel />
 				</main>
-			</>
+			</Provider>
 		);
 	}
 }

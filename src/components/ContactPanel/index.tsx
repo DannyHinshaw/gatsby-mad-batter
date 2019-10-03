@@ -1,36 +1,17 @@
 import * as React from "react";
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import { ComponentType, FormEvent, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { connect } from "react-redux";
 import { DateInput } from "semantic-ui-calendar-react";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import { baseUrl, bgImageQuality } from "../../api";
+import { formDataSet, formErrorSet } from "../../store/actions";
+import { IContactFormValues, initialFormValues } from "../../store/reducers/formDataReducer";
+import { IContactFormErrors, initialFormErrors } from "../../store/reducers/formErrorsReducer";
 import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
 
-interface IContactFormValues {
-	zip: string
-	date: string
-	name: string
-	email: string
-	phone: string
-	people: string
-	subject: string
-	message: string
-	glutenFree: string
-}
-
-interface IContactFormErrors {
-	zipError: boolean
-	dateError: boolean
-	nameError: boolean
-	emailError: boolean
-	phoneError: boolean
-	peopleError: boolean
-	subjectError: boolean
-	messageError: boolean
-	glutenFreeError: boolean
-}
 
 const BLACK_OUT_DATES: string[] = [
 	"07-05-2019",
@@ -92,29 +73,6 @@ const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/"
 const tokenURL: string = functionsBaseURL.concat("token");
 const emailURL: string = functionsBaseURL.concat("email");
 
-const initialFormValues: IContactFormValues = {
-	zip: "",
-	date: "",
-	name: "",
-	email: "",
-	phone: "",
-	people: "",
-	subject: "",
-	message: "",
-	glutenFree: "No"
-};
-
-const initialFormErrors: IContactFormErrors = {
-	zipError: false,
-	dateError: false,
-	nameError: false,
-	emailError: false,
-	phoneError: false,
-	peopleError: false,
-	subjectError: false,
-	messageError: false,
-	glutenFreeError: false
-};
 
 const numberOfPeopleOptions: DropdownItemProps[] = [
 	"1 - 10",
@@ -146,33 +104,28 @@ const useForceUpdate = () => {
 	return () => set(!value);
 };
 
-export type StateSetter = Dispatch<SetStateAction<any>>;
+export interface IContactPanel {
+	formErrorSet: typeof formErrorSet
+	formDataSet: typeof formDataSet
+	formErrors: IContactFormErrors
+	formData: IContactFormValues
+}
 
 /**
  * Main contact form component.
  * @returns {JSX.Element}
  * @constructor
  */
-const ContactPanel = (): JSX.Element => {
-	const [refresh, setRefresh] = useState(false);
-	const [formErrors, setFormErrors] = useState(initialFormErrors);
-	const [formData, setFormData] = useState(initialFormValues);
-	const [glutenFree, setGlutenFree] = useState("No");
-
-	console.log("formData::", formData);
+const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.Element => {
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(true);
 	const [error, setError] = useState(true);
 	const forceUpdate = useForceUpdate();
 
-	setTimeout(() => setGlutenFree("Yes"), 3000);
 	const handleInputChange = (e: any, { name, value }: any) => {
-		if (name === "glutenFree") {
-			setGlutenFree(value);
-		}
-
-		if (formData.hasOwnProperty(name)) {
-			setFormData({ ...formData, [name]: value });
+		if (props.formData.hasOwnProperty(name)) {
+			const newVals = { ...props.formData, [name]: value };
+			props.formDataSet(newVals);
 		}
 	};
 
@@ -180,10 +133,10 @@ const ContactPanel = (): JSX.Element => {
 	// @ts-ignore
 	const submit = (event: FormEvent, data: FormProps) => {
 		Object.keys(initialFormErrors).forEach((k: string) => initialFormErrors[k] = false);
-		setFormErrors(initialFormErrors);
+		props.formErrorSet(initialFormErrors);
 		setLoading(true);
 
-		const { name, email, phone, zip, people, date, subject, message } = formData;
+		const { name, email, phone, zip, people, date, subject, message } = props.formData;
 		if (!name || name.length < 2) {
 			initialFormErrors.nameError = true;
 		}
@@ -211,8 +164,8 @@ const ContactPanel = (): JSX.Element => {
 			initialFormErrors.messageError = true;
 		}
 
-		setFormErrors(initialFormErrors);
-		const errors: boolean = Object.keys(formErrors).some((k: string) => formErrors[k]);
+		props.formErrorSet(initialFormErrors);
+		const errors: boolean = Object.keys(props.formErrors).some((k: string) => props.formErrors[k]);
 		if (errors) {
 			setLoading(false);
 
@@ -225,11 +178,11 @@ const ContactPanel = (): JSX.Element => {
 			.then(res => res.json())
 			.then(({ token }) => fetch(emailURL, {
 				method: "POST",
-				body: JSON.stringify({ token, ...formData })
+				body: JSON.stringify({ token, ...props.formData })
 			})).then(() => {
 				setLoading(false);
 				setSuccess(false);
-				setFormData(initialFormValues);
+				props.formDataSet(initialFormValues);
 			}).catch(err => {
 				console.error(err);
 				setLoading(false);
@@ -237,180 +190,199 @@ const ContactPanel = (): JSX.Element => {
 			});
 	};
 
-	const picker = () => {
+	const picker = () =>
 		// @ts-ignore
-		return <DateInput name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={formData.date} iconPosition="left"
-		                  disable={BLACK_OUT_DATES} hideMobileKeyboard={true} popupPosition="top center"
-		                  onChange={handleInputChange} error={formErrors.dateError} />;
-	};
-
-	const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103411/mad-batter/flowers-batch-bg.jpg`;
+		<DateInput name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={props.formData.date} iconPosition="left"
+		           disable={BLACK_OUT_DATES} hideMobileKeyboard={true} popupPosition="top center"
+		           onChange={handleInputChange} error={props.formErrors.dateError} />;
 
 	return (
-		<ParallaxPanel scrollId="contact" bgImage={bgImage} pHeight="115vh">
-			<div id="contactContainer" className="panel-text">
-				<div className="header-center-container">
-					<h3 className="title" style={{ width: "15rem" }}>
-						CONTACT
+		<div id="contactContainer" className="panel-text">
+
+			<div className="header-center-container">
+				<h3 className="title" style={{ width: "15rem" }}>
+					CONTACT
+				</h3>
+			</div>
+
+			<div id="socialLinks">
+				<a
+					href="https://www.facebook.com/madefromscratchbaking/"
+					rel="noreferrer noopener"
+					target="_blank"
+					title="Instagram"
+				>
+					<FaFacebook className="social" />
+				</a>
+				<a
+					href="https://www.instagram.com/sprinkleallthethings/"
+					rel="noreferrer noopener"
+					target="_blank"
+					title="Instagram"
+				>
+					<FaInstagram className="social" />
+				</a>
+			</div>
+
+			<div id="semanticForm">
+				<Form
+					loading={loading}
+					onSubmit={submit}
+				>
+					<h3 style={{ textAlign: "center" }}>
+						Message
 					</h3>
-				</div>
 
-				<div id="socialLinks">
-					<a
-						href="https://www.facebook.com/madefromscratchbaking/"
-						rel="noreferrer noopener"
-						target="_blank"
-						title="Instagram"
-					>
-						<FaFacebook className="social" />
-					</a>
-					<a
-						href="https://www.instagram.com/sprinkleallthethings/"
-						rel="noreferrer noopener"
-						target="_blank"
-						title="Instagram"
-					>
-						<FaInstagram className="social" />
-					</a>
-				</div>
+					<p style={{ fontSize: ".7rem" }}>
+						Required Fields *
+					</p>
 
-				<div id="semanticForm">
-					<Form
-						loading={loading}
-						onSubmit={submit}
-					>
-						<h3 style={{ textAlign: "center" }}>
-							Message
-						</h3>
-
-						<p style={{ fontSize: ".7rem" }}>
-							Required Fields *
-						</p>
-
-						<Form.Input
-							fluid={true}
-							name="name"
-							label="Name*"
-							placeholder="Mary Jane"
+					<Form.Input
+						fluid={true}
+						name="name"
+						label="Name*"
+						placeholder="Mary Jane"
+						value={props.formData.name}
+						onChange={handleInputChange}
+						error={props.formErrors.nameError}
+					/>
+					<Form.Input
+						fluid={true}
+						name="email"
+						value={props.formData.email}
+						onChange={handleInputChange}
+						label="Email*"
+						placeholder="mary@example.com"
+						error={props.formErrors.emailError}
+					/>
+					<Form.Input
+						fluid={true}
+						name="phone"
+						value={props.formData.phone}
+						onChange={handleInputChange}
+						label="Phone*"
+						placeholder="555-555-5555"
+						error={props.formErrors.phoneError}
+					/>
+					<Form.Input
+						fluid={true}
+						name="zip"
+						value={props.formData.zip}
+						onChange={handleInputChange}
+						label="Event Zip Code*"
+						placeholder="29045"
+						error={props.formErrors.zipError}
+					/>
+					<Form.Group grouped={true}>
+						<label>Gluten Free?</label>
+						<Form.Radio
+							label="Yes"
+							value="Yes"
+							name="glutenFree"
+							checked={props.formData.glutenFree === "Yes"}
 							onChange={handleInputChange}
-							error={formErrors.nameError}
 						/>
-						<Form.Input
-							fluid={true}
-							name="email"
+						<Form.Radio
+							label="No"
+							value="No"
+							name="glutenFree"
+							checked={props.formData.glutenFree === "No"}
 							onChange={handleInputChange}
-							label="Email*"
-							placeholder="mary@example.com"
-							error={formErrors.emailError}
 						/>
-						<Form.Input
-							fluid={true}
-							name="phone"
-							onChange={handleInputChange}
-							label="Phone*"
-							placeholder="555-555-5555"
-							error={formErrors.phoneError}
-						/>
-						<Form.Input
-							fluid={true}
-							name="zip"
-							onChange={handleInputChange}
-							label="Event Zip Code*"
-							placeholder="29045"
-							error={formErrors.zipError}
-						/>
-						<Form.Group grouped={true}>
-							<label>Gluten Free?</label>
-							<Form.Radio
-								label="Yes"
-								value="Yes"
-								name="glutenFree"
-								checked={glutenFree === "Yes"}
-								onChange={handleInputChange}
-							/>
-							<Form.Radio
-								label="No"
-								value="No"
-								name="glutenFree"
-								checked={glutenFree === "No"}
-								onChange={handleInputChange}
-							/>
-						</Form.Group>
-						<Form.Dropdown
-							name="people"
-							value={formData.people}
-							onChange={handleInputChange}
-							label="Number of People*"
-							placeholder="Head Count"
-							selection={true}
-							options={numberOfPeopleOptions}
-							error={formErrors.peopleError}
-						/>
-						<Form.Field>
-							<label>Event Date*</label>
-							<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
+					</Form.Group>
+					<Form.Dropdown
+						name="people"
+						value={props.formData.people}
+						onChange={handleInputChange}
+						label="Number of People*"
+						placeholder="Head Count"
+						selection={true}
+						options={numberOfPeopleOptions}
+						error={props.formErrors.peopleError}
+					/>
+					<Form.Field>
+						<label>Event Date*</label>
+						<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
 								*Blocked out dates on the calendar are already booked*
 							</span>
 
 
-							{picker()}
+						{picker()}
 
 
-						</Form.Field>
-						<Form.Input
-							fluid={true}
-							name="subject"
-							id="subjectInput"
-							value={formData.subject}
-							onChange={handleInputChange}
-							label="Subject*"
-							placeholder="Ex. Birthday Cake!"
-							error={formErrors.subjectError}
-						/>
-						<Form.TextArea
-							name="message"
-							value={formData.message}
-							onChange={handleInputChange}
-							label="Message*"
-							placeholder="Tell us more about your order..."
-							error={formErrors.messageError}
-						/>
+					</Form.Field>
+					<Form.Input
+						fluid={true}
+						name="subject"
+						id="subjectInput"
+						value={props.formData.subject}
+						onChange={handleInputChange}
+						label="Subject*"
+						placeholder="Ex. Birthday Cake!"
+						error={props.formErrors.subjectError}
+					/>
+					<Form.TextArea
+						name="message"
+						value={props.formData.message}
+						onChange={handleInputChange}
+						label="Message*"
+						placeholder="Tell us more about your order..."
+						error={props.formErrors.messageError}
+					/>
 
-						<Message
-							success={success}
-							header="Message sent!"
-							style={{ backgroundColor: "#a3f5a3" }}
-							content="Thanks for reaching out, you will hear back from us soon!"
-						/>
-						<Message
-							error={error}
-							header="Error"
-							style={{ backgroundColor: "#f55969" }}
-							content="Oops, something went wrong. Please try again later."
-						/>
+					<Message
+						success={success}
+						header="Message sent!"
+						style={{ backgroundColor: "#a3f5a3" }}
+						content="Thanks for reaching out, you will hear back from us soon!"
+					/>
+					<Message
+						error={error}
+						header="Error"
+						style={{ backgroundColor: "#f55969" }}
+						content="Oops, something went wrong. Please try again later."
+					/>
 
-						<div style={{ textAlign: "center" }}>
-							<Form.Button
-								disabled={
-									!formData.message ||
-									!formData.subject ||
-									!formData.people ||
-									!formData.name ||
-									!formData.zip ||
-									!formData.phone ||
-									!formData.email ||
-									!formData.date
-								}
-							>
-								Submit
-							</Form.Button>
-						</div>
+					<div style={{ textAlign: "center" }}>
+						<Form.Button
+							disabled={
+								!props.formData.message ||
+								!props.formData.subject ||
+								!props.formData.people ||
+								!props.formData.name ||
+								!props.formData.zip ||
+								!props.formData.phone ||
+								!props.formData.email ||
+								!props.formData.date
+							}
+						>
+							Submit
+						</Form.Button>
+					</div>
 
-					</Form>
-				</div>
+				</Form>
 			</div>
-		</ParallaxPanel>
+		</div>
 	);
 };
 
+const mapStateToProps = ({ formData, formErrors }) => ({ formData, formErrors });
+const ContactFormLoaded = connect(mapStateToProps, {
+	formErrorSet,
+	formDataSet
+})(ContactForm);
+
+/**
+ * ParallaxPanel wrapper for the contact form to abstract away store and double refreshes.
+ * @returns {any}
+ * @constructor
+ */
+const ContactPanel = () => {
+	const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103411/mad-batter/flowers-batch-bg.jpg`;
+	return (
+		<ParallaxPanel scrollId="contact" bgImage={bgImage} pHeight="115vh">
+			<ContactFormLoaded />
+		</ParallaxPanel>
+	);
+};
 export default ContactPanel;
