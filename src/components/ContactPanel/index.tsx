@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { DateInput } from "semantic-ui-calendar-react";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
@@ -146,23 +146,33 @@ const useForceUpdate = () => {
 	return () => set(!value);
 };
 
+export type StateSetter = Dispatch<SetStateAction<any>>;
+
 /**
  * Main contact form component.
  * @returns {JSX.Element}
  * @constructor
  */
 const ContactPanel = (): JSX.Element => {
+	const [refresh, setRefresh] = useState(false);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
 	const [formData, setFormData] = useState(initialFormValues);
+	const [glutenFree, setGlutenFree] = useState("No");
+
+	console.log("formData::", formData);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(true);
 	const [error, setError] = useState(true);
 	const forceUpdate = useForceUpdate();
 
+	setTimeout(() => setGlutenFree("Yes"), 3000);
 	const handleInputChange = (e: any, { name, value }: any) => {
+		if (name === "glutenFree") {
+			setGlutenFree(value);
+		}
+
 		if (formData.hasOwnProperty(name)) {
 			setFormData({ ...formData, [name]: value });
-			console.log(formData);
 		}
 	};
 
@@ -282,14 +292,12 @@ const ContactPanel = (): JSX.Element => {
 							name="name"
 							label="Name*"
 							placeholder="Mary Jane"
-							value={formData.name}
 							onChange={handleInputChange}
 							error={formErrors.nameError}
 						/>
 						<Form.Input
 							fluid={true}
 							name="email"
-							value={formData.email}
 							onChange={handleInputChange}
 							label="Email*"
 							placeholder="mary@example.com"
@@ -298,7 +306,6 @@ const ContactPanel = (): JSX.Element => {
 						<Form.Input
 							fluid={true}
 							name="phone"
-							value={formData.phone}
 							onChange={handleInputChange}
 							label="Phone*"
 							placeholder="555-555-5555"
@@ -307,7 +314,6 @@ const ContactPanel = (): JSX.Element => {
 						<Form.Input
 							fluid={true}
 							name="zip"
-							value={formData.zip}
 							onChange={handleInputChange}
 							label="Event Zip Code*"
 							placeholder="29045"
@@ -319,14 +325,14 @@ const ContactPanel = (): JSX.Element => {
 								label="Yes"
 								value="Yes"
 								name="glutenFree"
-								checked={formData.glutenFree === "Yes"}
+								checked={glutenFree === "Yes"}
 								onChange={handleInputChange}
 							/>
 							<Form.Radio
 								label="No"
 								value="No"
 								name="glutenFree"
-								checked={formData.glutenFree === "No"}
+								checked={glutenFree === "No"}
 								onChange={handleInputChange}
 							/>
 						</Form.Group>

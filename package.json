@@ -6,7 +6,7 @@
   "scripts": {
     "start:lambda": "NODE_ENV=dev netlify-lambda -c ./config/webpack.functions.js serve src/functions",
     "build:lambda": "netlify-lambda -c ./config/webpack.functions.js build src/functions",
-    "develop": "gatsby develop",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve"
   },
@@ -29,8 +29,8 @@
     "node-sass": "^4.11.0",
     "nodemailer": "^5.0.0",
     "prop-types": "^15.6.2",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
     "react-headroom": "2.2.2",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.2.2",
@@ -41,7 +41,7 @@
     "react-typography": "^0.16.19",
     "semantic-ui-calendar-react": "^0.15.3",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.87.3",
+    "semantic-ui-react": "^0.88.1",
     "slick-carousel": "^1.8.1",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0",
