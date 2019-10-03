@@ -67,8 +67,5 @@
     "@types/yup": "^0.26.23",
     "netlify-lambda": "^1.1.1",
     "typescript": "^3.5.3"
-  },
-  "resolutions": {
-    "**/**/eslint-utils": "^1.4.1"
   }
 }
