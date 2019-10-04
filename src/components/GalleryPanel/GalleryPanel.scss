@@ -1,61 +1,53 @@
 @import "../../../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
 @import "../../style/theme";
 
-div[name="gallery"] {
-  background-color: $dark-blue !important;
-  box-shadow: $theme-shadow;
+#gallery {
+  top: 0;
+  height: fit-content;
+  padding: 0 !important;
 
-  .react-parallax {
-    height: 100vh;
+  img {
+    background-color: $dark-blue !important;
+    border-radius: 5px;
   }
 
-  #gallery {
-    top: 0;
-    padding: 0 !important;
+  .image-gallery {
+    font-size: small;
 
-    img {
-      background-color: $dark-blue !important;
-      border-radius: 5px;
+    .image-gallery-thumbnail {
+      border: none;
+      text-align: center;
+      width: auto;
+
+      .image-gallery-thumbnail-inner {
+        height: 80px
+      }
+
+      img {
+        height: 75px;
+        width: auto;
+      }
     }
 
-    .image-gallery {
-      font-size: small;
+    // Prevent image bleed on small screens
+    .image-gallery-slide:not(.center) {
+      display: none;
+    }
 
-      .image-gallery-thumbnail {
-        border: none;
-        text-align: center;
+    .image-gallery-image {
+      background-color: $dark-blue;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      img {
+        box-shadow: $theme-shadow;
+        margin-bottom: 0;
+        max-height: 110vh;
         width: auto;
-
-        .image-gallery-thumbnail-inner {
-          height: 80px
-        }
-
-        img {
-          height: 75px;
-          width: auto;
-        }
-      }
-
-      // Prevent image bleed on small screens
-      .image-gallery-slide:not(.center) {
-        display: none;
-      }
-
-      .image-gallery-image {
-        background-color: $dark-blue;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-
-        img {
-          box-shadow: $theme-shadow;
-          margin-bottom: 0;
-          max-height: 110vh;
-          width: auto;
-        }
       }
     }
   }
