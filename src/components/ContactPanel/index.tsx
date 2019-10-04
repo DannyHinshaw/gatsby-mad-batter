@@ -45,6 +45,7 @@ const BLACK_OUT_DATES: string[] = [
 	"09-21-2019",
 	"09-22-2019",
 
+	"10-12-2019",
 	"10-19-2019",
 	"10-25-2019",
 	"10-26-2019",
@@ -67,7 +68,21 @@ const BLACK_OUT_DATES: string[] = [
 	"12-25-2019",
 	"12-26-2019",
 	"12-27-2019",
-	"12-28-2019"
+	"12-28-2019",
+
+	// Mondays Blocks
+	"10-14-2019",
+	"10-21-2019",
+	"10-28-2019",
+	"11-04-2019",
+	"11-11-2019",
+	"11-18-2019",
+	"11-25-2019",
+	"12-02-2019",
+	"12-09-2019",
+	"12-16-2019",
+	"12-23-2019",
+	"12-30-2019",
 ];
 const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
