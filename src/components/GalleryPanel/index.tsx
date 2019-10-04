@@ -26,8 +26,6 @@ class GalleryPanel extends React.Component {
 			.catch(console.error);
 	}
 
-	// 			<ParallaxPanel scrollId="gallery" pHeight="auto">
-	// 			</ParallaxPanel>
 	public render() {
 		return (
 			<div id="gallery" className="panel-text">

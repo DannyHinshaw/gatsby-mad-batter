@@ -3,6 +3,7 @@
 
 div[name="gallery"] {
   background-color: $dark-blue !important;
+  box-shadow: $theme-shadow;
 
   .react-parallax {
     height: 100vh;
@@ -57,5 +58,16 @@ div[name="gallery"] {
         }
       }
     }
+  }
+}
+
+.image-gallery-image {
+  background-color: $theme-blue;
+  text-align: center;
+
+  img {
+    margin-bottom: 0;
+    max-height: 100vh;
+    width: auto;
   }
 }
