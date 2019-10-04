@@ -1,7 +1,6 @@
 import * as React from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import { formatURLs, IGalleryPanelState, IResponseData, TAGGED_IMAGES_URL } from "../../api";
-import ParallaxPanel from "../ParallaxPanel";
 import "./GalleryPanel.scss";
 
 
@@ -27,18 +26,18 @@ class GalleryPanel extends React.Component {
 			.catch(console.error);
 	}
 
+	// 			<ParallaxPanel scrollId="gallery" pHeight="auto">
+	// 			</ParallaxPanel>
 	public render() {
 		return (
-			<ParallaxPanel scrollId="gallery" pHeight="auto">
-				<div id="gallery" className="panel-text">
-					<ImageGallery
-						showFullscreenButton={false}
-						showPlayButton={false}
-						showThumbnails={false}
-						items={this.state.images}
-					/>
-				</div>
-			</ParallaxPanel>
+			<div id="gallery" className="panel-text">
+				<ImageGallery
+					showFullscreenButton={false}
+					showPlayButton={false}
+					showThumbnails={false}
+					items={this.state.images}
+				/>
+			</div>
 		);
 	}
 }
