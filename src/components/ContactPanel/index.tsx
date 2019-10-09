@@ -80,9 +80,10 @@ const BLACK_OUT_DATES: string[] = [
 	"11-25-2019",
 	"12-02-2019",
 	"12-09-2019",
+	"12-14-2019",
 	"12-16-2019",
 	"12-23-2019",
-	"12-30-2019",
+	"12-30-2019"
 ];
 const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
@@ -141,6 +142,17 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 		if (props.formData.hasOwnProperty(name)) {
 			const newVals = { ...props.formData, [name]: value };
 			props.formDataSet(newVals);
+
+			// TODO: Finish patch. Should display a warning if
+			//  a user tries to enter and invalid date manually.
+			if (name === "date" && value && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
+				// const [year, month, day]: string[] = value.split("-");
+				// const formattedDate: string = `${month}-${day}-${year}`;
+				// const isBlocked: boolean = BLACK_OUT_DATES.includes(formattedDate);
+				// console.log("year::", year);
+				// console.log("month::", month);
+				// console.log("day::", day);
+			}
 		}
 	};
 
@@ -208,7 +220,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 	const picker = () =>
 		// @ts-ignore
 		<DateInput name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={props.formData.date} iconPosition="left"
-		           disable={BLACK_OUT_DATES} hideMobileKeyboard={true} popupPosition="top center"
+		           disable={BLACK_OUT_DATES} hideMobileKeyboard={true} popupPosition="top center" type="date"
 		           onChange={handleInputChange} error={props.formErrors.dateError} />;
 
 	return (
