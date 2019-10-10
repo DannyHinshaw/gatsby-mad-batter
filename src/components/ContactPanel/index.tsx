@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ComponentType, FormEvent, useState } from "react";
+import { ComponentType, FormEvent, useEffect, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { connect } from "react-redux";
 import { DateInput } from "semantic-ui-calendar-react";
@@ -150,6 +150,17 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 	const forceUpdate = useForceUpdate();
 	const reBackwardsDate: RegExp = /^\d{4}-\d{2}-\d{2}$/;
 
+	// Try to disable keyboard from popping over datepicker on mobile.
+	useEffect(() => {
+		const datePickers = document.querySelectorAll("[name=\"date\"]");
+
+		// @ts-ignore
+		[...datePickers].forEach((el => {
+			const currPicker = el as HTMLInputElement;
+			currPicker.setAttribute("readOnly", "true");
+		}));
+	}, []);
+
 	const handleInputChange = (e: any, { name, value }: any) => {
 		if (props.formData.hasOwnProperty(name)) {
 
@@ -249,10 +260,11 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 	const picker = () =>
 		// @ts-ignore
-		<DateInput name="date" dateFormat="MM-DD-YYYY" placeholder="Date"
-		           value={props.formData.date} iconPosition="left" disable={BLACK_OUT_DATES}
-		           hideMobileKeyboard={true} popupPosition="top center" type="date"
-		           onChange={handleInputChange} error={props.formErrors.dateError} />;
+		<DateInput
+			name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={props.formData.date}
+			iconPosition="left" disable={BLACK_OUT_DATES} hideMobileKeyboard={true}
+			popupPosition="top center" onChange={handleInputChange} readonly={true}
+			error={props.formErrors.dateError} />;
 
 	return (
 		<div id="contactContainer" className="panel-text">
