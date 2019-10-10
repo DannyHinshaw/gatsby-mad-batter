@@ -1,5 +1,15 @@
 @import "../../style/theme";
 
+// Hid native calendar arrow in chrome on mobile:
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+// Hid native calendar prompt in chrome on mobile:
+input[type="date"]::-webkit-input-placeholder {
+  visibility: hidden !important;
+}
+
 div[name="contact"] {
   .react-parallax-content {
     display: flex;
