@@ -128,31 +128,52 @@ export interface IContactPanel {
 }
 
 /**
+ * Convert from 'yyyy-mm-dd' to 'mm-dd-yyyy'.
+ * @param {string} dateString
+ * @returns {string}
+ */
+const humanFriendlyDate = (dateString: string): string => {
+	const [year, month, day]: string[] = dateString.split("-");
+	return `${month}-${day}-${year}`;
+};
+
+/**
  * Main contact form component.
  * @returns {JSX.Element}
  * @constructor
  */
 const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.Element => {
+	const [dateWarning, setDateWarning] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(true);
 	const [error, setError] = useState(true);
 	const forceUpdate = useForceUpdate();
+	const reBackwardsDate: RegExp = /^\d{4}-\d{2}-\d{2}$/;
 
 	const handleInputChange = (e: any, { name, value }: any) => {
 		if (props.formData.hasOwnProperty(name)) {
+
+			// Handle date conversions to match valid date type input: yyyy-mm-dd
+			if (name === "date" && value && reBackwardsDate.test(value)) {
+				const formattedDate: string = humanFriendlyDate(value);
+				const isBlocked: boolean = BLACK_OUT_DATES.includes(formattedDate);
+				if (isBlocked) {
+					const nullDate = { ...props.formData, date: "" };
+					props.formDataSet(nullDate);
+					return setDateWarning(false);
+				}
+
+			} else {
+				const [month, day, year]: string[] = value.split("-");
+				const formattedDate: string = `${year}-${month}-${day}`;
+				const mergedNewDate = { ...props.formData, date: formattedDate };
+				props.formDataSet(mergedNewDate);
+				return setDateWarning(true);
+			}
+
 			const newVals = { ...props.formData, [name]: value };
 			props.formDataSet(newVals);
-
-			// TODO: Finish patch. Should display a warning if
-			//  a user tries to enter and invalid date manually.
-			if (name === "date" && value && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
-				// const [year, month, day]: string[] = value.split("-");
-				// const formattedDate: string = `${month}-${day}-${year}`;
-				// const isBlocked: boolean = BLACK_OUT_DATES.includes(formattedDate);
-				// console.log("year::", year);
-				// console.log("month::", month);
-				// console.log("day::", day);
-			}
+			return setDateWarning(true);
 		}
 	};
 
@@ -192,7 +213,8 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 		}
 
 		props.formErrorSet(initialFormErrors);
-		const errors: boolean = Object.keys(props.formErrors).some((k: string) => props.formErrors[k]);
+		const errors: boolean = Object.keys(props.formErrors)
+			.some((k: string) => props.formErrors[k]);
 		if (errors) {
 			setLoading(false);
 
@@ -201,11 +223,19 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 			return forceUpdate();
 		}
 
+		// Make any final alterations to email payload
+		const payload = {
+			...props.formData,
+			date: reBackwardsDate.test(date)
+				? humanFriendlyDate(date)
+				: date
+		};
+
 		return fetch(tokenURL)
 			.then(res => res.json())
 			.then(({ token }) => fetch(emailURL, {
 				method: "POST",
-				body: JSON.stringify({ token, ...props.formData })
+				body: JSON.stringify({ token, ...payload })
 			})).then(() => {
 				setLoading(false);
 				setSuccess(false);
@@ -219,13 +249,13 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 	const picker = () =>
 		// @ts-ignore
-		<DateInput name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={props.formData.date} iconPosition="left"
-		           disable={BLACK_OUT_DATES} hideMobileKeyboard={true} popupPosition="top center" type="date"
+		<DateInput name="date" dateFormat="MM-DD-YYYY" placeholder="Date"
+		           value={props.formData.date} iconPosition="left" disable={BLACK_OUT_DATES}
+		           hideMobileKeyboard={true} popupPosition="top center" type="date"
 		           onChange={handleInputChange} error={props.formErrors.dateError} />;
 
 	return (
 		<div id="contactContainer" className="panel-text">
-
 			<div className="header-center-container">
 				<h3 className="title" style={{ width: "15rem" }}>
 					CONTACT
@@ -300,6 +330,33 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						placeholder="29045"
 						error={props.formErrors.zipError}
 					/>
+					<Form.Dropdown
+						name="people"
+						value={props.formData.people}
+						onChange={handleInputChange}
+						label="Number of People*"
+						placeholder="Head Count"
+						selection={true}
+						options={numberOfPeopleOptions}
+						error={props.formErrors.peopleError}
+					/>
+					<Form.Field>
+						<label>Event Date*</label>
+						<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
+								*Blocked out dates on the calendar are already booked*
+							</span>
+
+						{picker()}
+
+					</Form.Field>
+					<Message
+						warning={dateWarning}
+						header="Oops!"
+						style={{ backgroundColor: "#f5ae64" }}
+						content="Please use the calendar input to make sure
+						the date you enter is not already reserved."
+					/>
+
 					<Form.Group grouped={true}>
 						<label>Gluten Free?</label>
 						<Form.Radio
@@ -317,27 +374,6 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 							onChange={handleInputChange}
 						/>
 					</Form.Group>
-					<Form.Dropdown
-						name="people"
-						value={props.formData.people}
-						onChange={handleInputChange}
-						label="Number of People*"
-						placeholder="Head Count"
-						selection={true}
-						options={numberOfPeopleOptions}
-						error={props.formErrors.peopleError}
-					/>
-					<Form.Field>
-						<label>Event Date*</label>
-						<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
-								*Blocked out dates on the calendar are already booked*
-							</span>
-
-
-						{picker()}
-
-
-					</Form.Field>
 					<Form.Input
 						fluid={true}
 						name="subject"
