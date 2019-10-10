@@ -163,28 +163,8 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 	const handleInputChange = (e: any, { name, value }: any) => {
 		if (props.formData.hasOwnProperty(name)) {
-
-			// Handle date conversions to match valid date type input: yyyy-mm-dd
-			if (name === "date" && value && reBackwardsDate.test(value)) {
-				const formattedDate: string = humanFriendlyDate(value);
-				const isBlocked: boolean = BLACK_OUT_DATES.includes(formattedDate);
-				if (isBlocked) {
-					const nullDate = { ...props.formData, date: "" };
-					props.formDataSet(nullDate);
-					return setDateWarning(false);
-				}
-
-			} else {
-				const [month, day, year]: string[] = value.split("-");
-				const formattedDate: string = `${year}-${month}-${day}`;
-				const mergedNewDate = { ...props.formData, date: formattedDate };
-				props.formDataSet(mergedNewDate);
-				return setDateWarning(true);
-			}
-
 			const newVals = { ...props.formData, [name]: value };
 			props.formDataSet(newVals);
-			return setDateWarning(true);
 		}
 	};
 
@@ -234,19 +214,11 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 			return forceUpdate();
 		}
 
-		// Make any final alterations to email payload
-		const payload = {
-			...props.formData,
-			date: reBackwardsDate.test(date)
-				? humanFriendlyDate(date)
-				: date
-		};
-
 		return fetch(tokenURL)
 			.then(res => res.json())
 			.then(({ token }) => fetch(emailURL, {
 				method: "POST",
-				body: JSON.stringify({ token, ...payload })
+				body: JSON.stringify({ token, ...props.formData })
 			})).then(() => {
 				setLoading(false);
 				setSuccess(false);
@@ -361,14 +333,6 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						{picker()}
 
 					</Form.Field>
-					<Message
-						warning={dateWarning}
-						header="Oops!"
-						style={{ backgroundColor: "#f5ae64" }}
-						content="Please use the calendar input to make sure
-						the date you enter is not already reserved."
-					/>
-
 					<Form.Group grouped={true}>
 						<label>Gluten Free?</label>
 						<Form.Radio
