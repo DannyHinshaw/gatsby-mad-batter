@@ -4,7 +4,7 @@ import ParallaxPanel from "../ParallaxPanel";
 import "./MainPanel.scss";
 
 
-const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103451/mad-batter/disney_witches.jpg`;
+const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103451/mad-batter/shannon-setting-up.jpg`;
 
 const MainPanel = (): JSX.Element => {
 	return (

@@ -107,7 +107,7 @@ const testimonialQuote = (testimonial: ITestimonialObj, key: number): JSX.Elemen
  */
 const generateQuote = (testimonial: ITestimonialObj, i: number) => testimonialQuote(testimonial, i);
 
-const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103620/mad-batter/pumpkin_pie.jpg`;
+const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103620/mad-batter/birch-background.jpg`;
 
 /**
  * Testimonial panel component.

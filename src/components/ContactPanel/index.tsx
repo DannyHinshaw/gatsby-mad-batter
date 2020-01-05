@@ -453,7 +453,7 @@ const ContactFormLoaded = connect(mapStateToProps, {
  * @constructor
  */
 const ContactPanel = () => {
-	const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103411/mad-batter/flowers-batch-bg.jpg`;
+	const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103411/mad-batter/cupcakes-background.jpg`;
 	return (
 		<ParallaxPanel scrollId="contact" bgImage={bgImage} pHeight="115vh">
 			<ContactFormLoaded />

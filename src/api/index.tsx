@@ -24,7 +24,7 @@ export interface IGalleryPanelState {
 }
 
 export const baseUrl: string = "https://res.cloudinary.com/nulleffort/image";
-export const bgImageQuality: string = "q_45";
+export const bgImageQuality: string = "q_auto";
 export const TAGGED_IMAGES_URL: string = `${baseUrl}/list/madbatter.json`;
 export const clClient = new cloudinary.Cloudinary({ cloud_name: "nulleffort", secure: true });
 
