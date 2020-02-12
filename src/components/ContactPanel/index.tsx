@@ -124,7 +124,19 @@ const BLACK_OUT_DATES: string[] = [
 	// 2020!!!
 	"2-13-2020",
 	"2-14-2020",
-	"2-15-2020"
+	"2-15-2020",
+
+	"3-08-2020",
+	"3-09-2020",
+	"3-10-2020",
+	"3-11-2020",
+	"3-12-2020",
+	"3-13-2020",
+	"3-14-2020",
+	"3-15-2020",
+	"3-16-2020",
+	"3-17-2020",
+	"3-18-2020"
 ];
 const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
