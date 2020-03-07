@@ -137,6 +137,7 @@ const BLACK_OUT_DATES: string[] = [
 	"3-15-2020",
 	"3-16-2020",
 	"3-17-2020",
+	"3-22-2020",
 
 
 	// 2020 Monday Blocks
