@@ -54,7 +54,7 @@ export class Index extends React.Component<IndexPageProps> {
 					{/*<PromoPanel />*/}
 					<AboutPanel />
 					<TestimonialPanel />
-					<FlavorsPanel />
+					{/*<FlavorsPanel />*/}
 					<GalleryPanel />
 					<ContactPanel />
 				</main>
