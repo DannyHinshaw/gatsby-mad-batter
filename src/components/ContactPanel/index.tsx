@@ -13,7 +13,7 @@ import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
 
 
-const BLACK_OUT_DATES: string[] = [
+const _BLACK_OUT_2019 = [
 	"07-05-2019",
 	"07-06-2019",
 	"07-07-2019",
@@ -118,7 +118,10 @@ const BLACK_OUT_DATES: string[] = [
 	"12-14-2019",
 	"12-16-2019",
 	"12-23-2019",
-	"12-30-2019",
+	"12-30-2019"
+];
+
+const BLACK_OUT_DATES: string[] = [
 
 	// 2020!!!
 	"2-13-2020",
@@ -168,7 +171,7 @@ const BLACK_OUT_DATES: string[] = [
 	"5-16-2020",
 	"5-17-2020",
 	"5-18-2020",
-	"5-19-2020",
+	// "5-19-2020", // THIS DATE BREAKS THE COMPONENT
 	"5-20-2020",
 	"5-21-2020",
 	"5-22-2020",
@@ -394,10 +397,10 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 	const picker = () =>
 		// @ts-ignore
-		<DateInput
+		<DateInput readonly={true}
 			name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={props.formData.date}
 			iconPosition="left" disable={BLACK_OUT_DATES} hideMobileKeyboard={true}
-			popupPosition="top center" onChange={handleInputChange} readonly={true}
+			popupPosition="top center" onChange={handleInputChange}
 			error={props.formErrors.dateError} />;
 
 	return (
