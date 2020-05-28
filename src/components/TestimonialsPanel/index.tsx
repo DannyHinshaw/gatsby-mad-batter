@@ -1,7 +1,8 @@
+import BackgroundImage from "gatsby-background-image";
 import * as React from "react";
+import { ComponentType } from "react";
 import Slider, { Settings } from "react-slick";
-import { baseUrl, bgImageQuality } from "../../api";
-import ParallaxPanel from "../ParallaxPanel";
+import { ISectionProps } from "../../pages";
 import "./TestimonialsPanel.scss";
 
 interface ITestimonialObj {
@@ -107,27 +108,24 @@ const testimonialQuote = (testimonial: ITestimonialObj, key: number): JSX.Elemen
  */
 const generateQuote = (testimonial: ITestimonialObj, i: number) => testimonialQuote(testimonial, i);
 
-const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103620/mad-batter/birch-background.jpg`;
-
 /**
  * Testimonial panel component.
  * @returns {JSX.Element}
  * @constructor
  */
-const TestimonialPanel = (): JSX.Element => (
-	<ParallaxPanel scrollId="testimonial" bgImage={bgImage} pHeight="100vh">
-		<div id="testimonialText" className="panel-text">
-			<div className="header-center-container">
-				<h3 className="title" style={{ width: "25rem" }}>
-					TESTIMONIALS
-				</h3>
-			</div>
+const TestimonialPanel: ComponentType<ISectionProps> = ({ bgImage }): JSX.Element => (
+	<BackgroundImage fluid={bgImage} Tag="section" className="panel-text" id="testimonial">
 
-			<Slider {...settings}>
-				{testimonials.map(generateQuote)}
-			</Slider>
+		<div className="header-center-container">
+			<h3 className="title" style={{ width: "25rem" }}>
+				TESTIMONIALS
+			</h3>
 		</div>
-	</ParallaxPanel>
+
+		<Slider {...settings}>
+			{testimonials.map(generateQuote)}
+		</Slider>
+	</BackgroundImage>
 );
 
 export default TestimonialPanel;

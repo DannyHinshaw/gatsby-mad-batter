@@ -1,20 +1,18 @@
 import * as React from "react";
-import ParallaxPanel from "../ParallaxPanel";
 import "./PromoPanel.scss";
 
 
 const PromoPanel = (): JSX.Element => {
 	return (
-		<ParallaxPanel scrollId="promo">
-			<>
-				<div id="promoText" className="panel-text">
-					<div className="title-container">
-						<h3 className="title">
-							PROMOS & SPECIALS
-						</h3>
-					</div>
+		<section id="promo">
+			<div id="promoText" className="panel-text">
+				<div className="title-container">
+					<h3 className="title">
+						PROMOS & SPECIALS
+					</h3>
+				</div>
 
-					{/*
+				{/*
 					<div id="special" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
 						<h1>4th OF JULY SPECIAL</h1>
 						<br />
@@ -44,23 +42,22 @@ const PromoPanel = (): JSX.Element => {
 					<hr />
 */}
 
-					<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
-						<h1>FRESH MAD BATTER TEES!</h1>
-						<img className="img-circle" src="/imgs/mbc-tee.jpg" alt="MBC-Tee" />
-						<p>
-							Variety of styles available, starting @ $21.99!
-						</p>
+				<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
+					<h1>FRESH MAD BATTER TEES!</h1>
+					<img className="img-circle" src="/imgs/mbc-tee.jpg" alt="MBC-Tee" />
+					<p>
+						Variety of styles available, starting @ $21.99!
+					</p>
 
-						<p>
-							<a target="_blank" href="https://www.bonfire.com/mad-batter-cupcakery-shirts/">
-								To shop click here!
-							</a>
-						</p>
+					<p>
+						<a target="_blank" href="https://www.bonfire.com/mad-batter-cupcakery-shirts/">
+							To shop click here!
+						</a>
+					</p>
 
-					</div>
 				</div>
-			</>
-		</ParallaxPanel>
+			</div>
+		</section>
 	);
 };
 

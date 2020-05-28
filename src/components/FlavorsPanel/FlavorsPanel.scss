@@ -1,31 +1,28 @@
 @import "../../style/theme";
 
-div[name="flavors"] {
+#flavorsText {
   background-color: $theme-light-blue !important;
+  max-width: 1000px;
+  padding: 3rem 5%;
+  margin: 0 auto;
 
-  #flavorsText {
-    max-width: 1000px;
-    padding: 3rem 5%;
-    margin: 0 auto;
+  .title {
+    margin: auto;
+  }
 
-    .title {
-      margin: auto;
-    }
+  div {
+    margin: 3rem auto;
+  }
+
+  #flavorsGrid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 50% 50%;
+    line-height: 2.5rem;
+    font-size: 2rem;
 
     div {
-      margin: 3rem auto;
-    }
-
-    #flavorsGrid {
-      display: grid;
-      grid-gap: 10px;
-      grid-template-columns: 50% 50%;
-      line-height: 2.5rem;
-      font-size: 2rem;
-
-      div {
-        text-align: center;
-      }
+      text-align: center;
     }
   }
 }

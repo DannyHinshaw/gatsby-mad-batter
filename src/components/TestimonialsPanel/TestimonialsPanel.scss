@@ -3,134 +3,131 @@
 @import "../../style/theme";
 
 // Testimonial styles adapted from: https://codepen.io/hellokatili/pen/rVvMZb
-div[name="testimonial"] {
-  .react-parallax-content {
 
-    #testimonialText {
-      text-align: center;
+#testimonial {
+  text-align: center;
 
-      .content {
-        margin: auto;
-        padding: 20px;
-        width: 80%;
-        max-width: 1200px;
-        min-width: 300px;
-      }
+  .content {
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 1200px;
+    min-width: 300px;
+  }
 
-      .slick-slider {
-        margin: 30px auto 50px;
-      }
+  .slick-slider {
+    margin: 30px auto 50px;
+  }
 
-      .slick-prev,
-      .slick-next {
-        color: white;
-        opacity: 1;
-        height: 40px;
-        width: 40px;
-        margin-top: -20px;
+  .slick-prev,
+  .slick-next {
+    color: white;
+    opacity: 1;
+    height: 40px;
+    width: 40px;
+    margin-top: -20px;
 
-        path {
-          fill: rgba(255, 255, 255, 0.4);
-        }
+    path {
+      fill: rgba(255, 255, 255, 0.4);
+    }
 
-        &:hover {
-          path {
-            fill: #FFFFFF;
-          }
-        }
-      }
-
-      .slick-prev {
-        left: -35px;
-      }
-
-      .slick-next {
-        right: -35px;
-      }
-
-      .slick-prev:before,
-      .slick-next:before {
-        content: none;
-      }
-
-      .slick-dots li button:before {
-        color: rgba(255, 255, 255, 0.4);
-        opacity: 1;
-        font-size: 8px;
-      }
-
-      .slick-dots li.slick-active button:before {
-        color: #FFFFFF;
-      }
-
-      .quote-container {
-        min-height: 200px;
-        color: #666666;
-        font-size: 36px;
-        margin: 0 20px;
-        position: relative;
-
-        &:hover {
-          cursor: grab;
-        }
-
-        .quote {
-          position: relative;
-          z-index: 600;
-          padding: 40px;
-          margin: auto;
-
-          font-size: 20px;
-          font-style: italic;
-          line-height: 1.4 !important;
-          color: white;
-
-          blockquote {
-            border: none;
-            padding-left: 0;
-
-            p {
-              font-size: 2rem;
-              padding: 15px 25px 15px 0;
-              position: relative;
-              margin-bottom: 20px;
-
-              &:first-child:before {
-                content: '\201C';
-                color: rgba(255, 255, 255, 0.44);
-                font-family: Calibri, serif;
-                font-size: 7.5em;
-                font-weight: 700;
-                opacity: 1;
-                position: absolute;
-                top: 2rem;
-                left: -.2em;
-                text-shadow: none;
-                z-index: -10;
-              }
-            }
-          }
-
-          cite {
-            display: block;
-            font-size: 14px;
-
-            span {
-              font-size: 16px;
-              font-style: normal;
-              letter-spacing: 1px;
-              text-transform: uppercase;
-            }
-          }
-        }
-      }
-
-      .dragging .quote-container {
-        cursor: grabbing;
+    &:hover {
+      path {
+        fill: #FFFFFF;
       }
     }
   }
+
+  .slick-prev {
+    left: -35px;
+  }
+
+  .slick-next {
+    right: -35px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    content: none;
+  }
+
+  .slick-dots li button:before {
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+    font-size: 8px;
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: #FFFFFF;
+  }
+
+  .quote-container {
+    min-height: 200px;
+    color: #666666;
+    font-size: 36px;
+    margin: 0 20px;
+    position: relative;
+
+    &:hover {
+      cursor: grab;
+    }
+
+    .quote {
+      position: relative;
+      z-index: 600;
+      padding: 40px;
+      margin: auto;
+
+      font-size: 20px;
+      font-style: italic;
+      line-height: 1.4 !important;
+      color: white;
+
+      blockquote {
+        border: none;
+        padding-left: 0;
+
+        p {
+          font-size: 2rem;
+          padding: 15px 25px 15px 0;
+          position: relative;
+          margin-bottom: 20px;
+
+          &:first-child:before {
+            content: '\201C';
+            color: rgba(255, 255, 255, 0.44);
+            font-family: Calibri, serif;
+            font-size: 7.5em;
+            font-weight: 700;
+            opacity: 1;
+            position: absolute;
+            top: 2rem;
+            left: -.2em;
+            text-shadow: none;
+            z-index: -10;
+          }
+        }
+      }
+
+      cite {
+        display: block;
+        font-size: 14px;
+
+        span {
+          font-size: 16px;
+          font-style: normal;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .dragging .quote-container {
+    cursor: grabbing;
+  }
 }
+
 
 @media only screen and (max-width: 485px) {
   .quote-container {

@@ -1,11 +1,18 @@
 @import "../../style/theme";
 
-div[name="main"] {
-  .react-parallax-content {
-    #mainLogo {
-      padding: 2.5rem;
-      position: relative;
-      top: calc(55vh / 2);
+#main {
+  #logoContainer {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 100%;
     }
+  }
+
+  #mainLogo {
+    padding: 2.5rem;
+    position: absolute;
+    top: calc(55vh / 2);
   }
 }

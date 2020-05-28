@@ -17,11 +17,11 @@ const NavLink = (props: INavLinkProps): JSX.Element => (
 const Navbar = (): JSX.Element => {
 	return (
 		<Headroom>
-			<div id="navLinksContainer">
+			<nav id="navLinksContainer">
 				<NavLink targetName="about" linkText="ABOUT" />
 				<NavLink targetName="gallery" linkText="GALLERY" />
 				<NavLink targetName="contact" linkText="CONTACT" />
-			</div>
+			</nav>
 		</Headroom>
 	);
 };

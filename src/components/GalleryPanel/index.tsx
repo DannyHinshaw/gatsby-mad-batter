@@ -28,14 +28,14 @@ class GalleryPanel extends React.Component {
 
 	public render() {
 		return (
-			<div id="gallery" className="panel-text">
+			<section id="gallery">
 				<ImageGallery
 					showFullscreenButton={false}
 					showPlayButton={false}
 					showThumbnails={false}
 					items={this.state.images}
 				/>
-			</div>
+			</section>
 		);
 	}
 }

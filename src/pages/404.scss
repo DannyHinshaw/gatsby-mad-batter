@@ -1,0 +1,32 @@
+#notFound {
+  color: white;
+  font-size: 3rem;
+
+  a {
+    background-image: none;
+    text-shadow: none;
+  }
+
+  h3 {
+    color: white;
+    font-size: 4rem;
+    margin: 3rem 0;
+  }
+
+  #bgImage {
+    height: 100vh;
+  }
+
+  #txtContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    p {
+      a {
+        color: white;
+        text-decoration: underline;
+      }
+    }
+  }
+}

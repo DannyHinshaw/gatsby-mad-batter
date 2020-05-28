@@ -10,63 +10,68 @@ input[type="date"]::-webkit-input-placeholder {
   visibility: hidden !important;
 }
 
-div[name="contact"] {
-  .react-parallax-content {
-    display: flex;
-    justify-content: center;
+section#contact {
+  display: flex;
+  justify-content: center;
+  min-height: 1100px;
 
-    div:first-of-type {
+  div:first-of-type {
+    width: 100%;
+  }
+
+  #contactContainer {
+    text-align: center;
+
+    h3 {
+      margin-top: 0;
+    }
+
+    #socialLinks {
+      a {
+        background-image: none !important;
+      }
+
+      .social {
+        font-size: 3rem;
+        margin: 2rem;
+      }
+    }
+
+    #semanticForm {
+      background-color: #f5ece1;
+      border-radius: 5px;
+      box-shadow: $theme-shadow;
+      font-size: large;
+      padding: 30px;
+      margin: auto auto 5rem auto;
+      max-width: 500px;
+      min-width: 250px;
+      text-align: left;
       width: 100%;
-    }
 
-    #contactContainer {
-      text-align: center;
-
-      h3 {
-        margin-top: 0;
+      * {
+        color: #1d231e !important;
       }
 
-      #socialLinks {
-        a {
-          background-image: none !important;
-        }
-
-        .social {
-          font-size: 3rem;
-          margin: 2rem;
-        }
-      }
-
-      #semanticForm {
-        background-color: #f5ece1;
-        border-radius: 5px;
-        box-shadow: $theme-shadow;
-        font-size: large;
-        padding: 30px;
-        margin: auto auto 5rem auto;
-        max-width: 500px;
-        min-width: 250px;
-        text-align: left;
+      textarea {
+        resize: none;
         width: 100%;
+      }
 
-        * {
-          color: #1d231e !important;
-        }
+      input, textarea, .ui.selection.dropdown {
+        font-size: .7rem;
+      }
 
-        textarea {
-          resize: none;
-          width: 100%;
-        }
-
-        input, textarea, .ui.selection.dropdown {
-          font-size: .7rem;
-        }
-
-        button {
-          background-color: #4d76cc;
-          color: $theme-white !important;
-        }
+      button {
+        background-color: #4d76cc;
+        color: $theme-white !important;
       }
     }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  #contactContainer {
+    padding: 0 !important;
   }
 }

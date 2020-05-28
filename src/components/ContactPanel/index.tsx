@@ -1,3 +1,4 @@
+import BackgroundImage from "gatsby-background-image";
 import * as React from "react";
 import { ComponentType, FormEvent, useEffect, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
@@ -5,121 +6,120 @@ import { connect } from "react-redux";
 import { DateInput } from "semantic-ui-calendar-react";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
-import { baseUrl, bgImageQuality } from "../../api";
+import { ISectionProps } from "../../pages";
 import { formDataSet, formErrorSet } from "../../store/actions";
 import { IContactFormValues, initialFormValues } from "../../store/reducers/formDataReducer";
 import { IContactFormErrors, initialFormErrors } from "../../store/reducers/formErrorsReducer";
-import ParallaxPanel from "../ParallaxPanel";
 import "./ContactPanel.scss";
 
 
-const _BLACK_OUT_2019 = [
-	"07-05-2019",
-	"07-06-2019",
-	"07-07-2019",
-	"07-13-2019",
-	"07-22-2019",
-	"07-27-2019",
-
-	"08-17-2019",
-	"08-18-2019",
-
-	"08-20-2019",
-	"08-21-2019",
-	"08-22-2019",
-	"08-23-2019",
-	"08-24-2019",
-	"08-25-2019",
-
-	"09-01-2019",
-	"09-10-2019",
-	"09-11-2019",
-	"09-12-2019",
-	"09-13-2019",
-	"09-14-2019",
-	"09-15-2019",
-	"09-16-2019",
-	"09-18-2019",
-	"09-19-2019",
-	"09-20-2019",
-	"09-21-2019",
-	"09-22-2019",
-
-	"10-12-2019",
-	"10-13-2019",
-	"10-15-2019",
-	"10-16-2019",
-	"10-17-2019",
-	"10-18-2019",
-	"10-19-2019",
-	"10-20-2019",
-	"10-21-2019",
-	"10-22-2019",
-	"10-23-2019",
-	"10-24-2019",
-	"10-25-2019",
-	"10-26-2019",
-	"10-27-2019",
-	"10-28-2019",
-	"10-29-2019",
-	"10-30-2019",
-	"10-31-2019",
-
-	"11-07-2019",
-	"11-08-2019",
-	"11-09-2019",
-	"11-10-2019",
-	"11-11-2019",
-	"11-12-2019",
-	"11-13-2019",
-	"11-14-2019",
-	"11-15-2019",
-	"11-16-2019",
-	"11-17-2019",
-
-	"11-24-2019",
-	"11-25-2019",
-	"11-26-2019",
-	"11-27-2019",
-	"11-28-2019",
-	"11-29-2019",
-	"11-30-2019",
-
-	"12-01-2019",
-	"12-02-2019",
-
-	"12-13-2019",
-	"12-14-2019",
-	"12-15-2019",
-	"12-16-2019",
-	"12-17-2019",
-	"12-18-2019",
-	"12-19-2019",
-	"12-20-2019",
-	"12-21-2019",
-	"12-22-2019",
-	"12-23-2019",
-	"12-24-2019",
-	"12-25-2019",
-	"12-26-2019",
-	"12-27-2019",
-	"12-28-2019",
-	"12-29-2019",
-
-	"10-14-2019",
-	"10-21-2019",
-	"10-28-2019",
-	"11-04-2019",
-	"11-11-2019",
-	"11-18-2019",
-	"11-25-2019",
-	"12-02-2019",
-	"12-09-2019",
-	"12-14-2019",
-	"12-16-2019",
-	"12-23-2019",
-	"12-30-2019"
-];
+// const _BLACK_OUT_2019 = [
+// 	"07-05-2019",
+// 	"07-06-2019",
+// 	"07-07-2019",
+// 	"07-13-2019",
+// 	"07-22-2019",
+// 	"07-27-2019",
+//
+// 	"08-17-2019",
+// 	"08-18-2019",
+//
+// 	"08-20-2019",
+// 	"08-21-2019",
+// 	"08-22-2019",
+// 	"08-23-2019",
+// 	"08-24-2019",
+// 	"08-25-2019",
+//
+// 	"09-01-2019",
+// 	"09-10-2019",
+// 	"09-11-2019",
+// 	"09-12-2019",
+// 	"09-13-2019",
+// 	"09-14-2019",
+// 	"09-15-2019",
+// 	"09-16-2019",
+// 	"09-18-2019",
+// 	"09-19-2019",
+// 	"09-20-2019",
+// 	"09-21-2019",
+// 	"09-22-2019",
+//
+// 	"10-12-2019",
+// 	"10-13-2019",
+// 	"10-15-2019",
+// 	"10-16-2019",
+// 	"10-17-2019",
+// 	"10-18-2019",
+// 	"10-19-2019",
+// 	"10-20-2019",
+// 	"10-21-2019",
+// 	"10-22-2019",
+// 	"10-23-2019",
+// 	"10-24-2019",
+// 	"10-25-2019",
+// 	"10-26-2019",
+// 	"10-27-2019",
+// 	"10-28-2019",
+// 	"10-29-2019",
+// 	"10-30-2019",
+// 	"10-31-2019",
+//
+// 	"11-07-2019",
+// 	"11-08-2019",
+// 	"11-09-2019",
+// 	"11-10-2019",
+// 	"11-11-2019",
+// 	"11-12-2019",
+// 	"11-13-2019",
+// 	"11-14-2019",
+// 	"11-15-2019",
+// 	"11-16-2019",
+// 	"11-17-2019",
+//
+// 	"11-24-2019",
+// 	"11-25-2019",
+// 	"11-26-2019",
+// 	"11-27-2019",
+// 	"11-28-2019",
+// 	"11-29-2019",
+// 	"11-30-2019",
+//
+// 	"12-01-2019",
+// 	"12-02-2019",
+//
+// 	"12-13-2019",
+// 	"12-14-2019",
+// 	"12-15-2019",
+// 	"12-16-2019",
+// 	"12-17-2019",
+// 	"12-18-2019",
+// 	"12-19-2019",
+// 	"12-20-2019",
+// 	"12-21-2019",
+// 	"12-22-2019",
+// 	"12-23-2019",
+// 	"12-24-2019",
+// 	"12-25-2019",
+// 	"12-26-2019",
+// 	"12-27-2019",
+// 	"12-28-2019",
+// 	"12-29-2019",
+//
+// 	"10-14-2019",
+// 	"10-21-2019",
+// 	"10-28-2019",
+// 	"11-04-2019",
+// 	"11-11-2019",
+// 	"11-18-2019",
+// 	"11-25-2019",
+// 	"12-02-2019",
+// 	"12-09-2019",
+// 	"12-14-2019",
+// 	"12-16-2019",
+// 	"12-23-2019",
+// 	"12-30-2019"
+// ];
 
 const BLACK_OUT_DATES: string[] = [
 
@@ -447,6 +447,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						fluid={true}
 						name="name"
 						label="Name*"
+						id="nameInput"
 						placeholder="Mary Jane"
 						value={props.formData.name}
 						onChange={handleInputChange}
@@ -458,6 +459,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						value={props.formData.email}
 						onChange={handleInputChange}
 						label="Email*"
+						id="emailInput"
 						placeholder="mary@example.com"
 						error={props.formErrors.emailError}
 					/>
@@ -467,6 +469,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						value={props.formData.phone}
 						onChange={handleInputChange}
 						label="Phone*"
+						id="phoneInput"
 						placeholder="555-555-5555"
 						error={props.formErrors.phoneError}
 					/>
@@ -476,6 +479,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						value={props.formData.zip}
 						onChange={handleInputChange}
 						label="Event Zip Code*"
+						id="zipInput"
 						placeholder="29045"
 						error={props.formErrors.zipError}
 					/>
@@ -484,36 +488,40 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						value={props.formData.people}
 						onChange={handleInputChange}
 						label="Number of People*"
+						id="headCountInput"
 						placeholder="Head Count"
 						selection={true}
 						options={numberOfPeopleOptions}
 						error={props.formErrors.peopleError}
 					/>
 					<Form.Field>
-						<label>Event Date*</label>
-						<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
+						<label>
+							Event Date*
+							<br />
+							<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
 								*Blocked out dates on the calendar are already booked*
 							</span>
-
-						{picker()}
-
+							{picker()}
+						</label>
 					</Form.Field>
 					<Form.Group grouped={true}>
-						<label>Gluten Free?</label>
-						<Form.Radio
-							label="Yes"
-							value="Yes"
-							name="glutenFree"
-							checked={props.formData.glutenFree === "Yes"}
-							onChange={handleInputChange}
-						/>
-						<Form.Radio
-							label="No"
-							value="No"
-							name="glutenFree"
-							checked={props.formData.glutenFree === "No"}
-							onChange={handleInputChange}
-						/>
+						<label>
+							Gluten Free?
+							<Form.Radio
+								label="Yes"
+								value="Yes"
+								name="glutenFree"
+								checked={props.formData.glutenFree === "Yes"}
+								onChange={handleInputChange}
+							/>
+							<Form.Radio
+								label="No"
+								value="No"
+								name="glutenFree"
+								checked={props.formData.glutenFree === "No"}
+								onChange={handleInputChange}
+							/>
+						</label>
 					</Form.Group>
 					<Form.Input
 						fluid={true}
@@ -530,6 +538,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						value={props.formData.message}
 						onChange={handleInputChange}
 						label="Message*"
+						id="messageInput"
 						placeholder="Tell us more about your order..."
 						error={props.formErrors.messageError}
 					/>
@@ -581,12 +590,10 @@ const ContactFormLoaded = connect(mapStateToProps, {
  * @returns {any}
  * @constructor
  */
-const ContactPanel = () => {
-	const bgImage: string = `${baseUrl}/upload/${bgImageQuality},f_auto/v1563103411/mad-batter/cupcakes-background.jpg`;
-	return (
-		<ParallaxPanel scrollId="contact" bgImage={bgImage} pHeight="115vh">
-			<ContactFormLoaded />
-		</ParallaxPanel>
-	);
-};
+const ContactPanel: ComponentType<ISectionProps> = ({ bgImage }) => (
+	<BackgroundImage id="contact" fluid={bgImage} Tag="section">
+		<ContactFormLoaded />
+	</BackgroundImage>
+);
+
 export default ContactPanel;

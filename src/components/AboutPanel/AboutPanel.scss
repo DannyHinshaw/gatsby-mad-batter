@@ -1,19 +1,17 @@
 @import "../../style/theme";
 
-div[name="about"] {
+
+#about {
   background-color: $theme-pink !important;
+  min-height: 1100px;
+  padding: 3rem 5% 0;
 
-  #aboutText {
-    max-width: 1000px;
-    padding: 3rem 5%;
-
-    div {
-      margin: 3rem auto auto auto;
-    }
+  div {
+    margin: 3rem auto auto;
   }
+}
 
-  #cupcakeContainer {
-    height: 30vh;
-    text-align: center;
-  }
+#cupcakeContainer {
+  height: 30vh;
+  text-align: center;
 }

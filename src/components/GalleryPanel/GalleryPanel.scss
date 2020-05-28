@@ -9,6 +9,7 @@
   img {
     background-color: $dark-blue !important;
     border-radius: 5px;
+    margin-bottom: 0 !important;
   }
 
   .image-gallery {
@@ -35,7 +36,6 @@
     }
 
     .image-gallery-image {
-      background-color: $dark-blue;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -45,7 +45,6 @@
 
       img {
         box-shadow: $theme-shadow;
-        margin-bottom: 0;
         max-height: 110vh;
         width: auto;
       }
@@ -58,7 +57,6 @@
   text-align: center;
 
   img {
-    margin-bottom: 0;
     max-height: 100vh;
     width: auto;
   }

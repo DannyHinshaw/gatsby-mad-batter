@@ -6,7 +6,7 @@
 }
 
 html, body {
-  background-color: $theme-dark;
+  background-color: $theme-deep-blue;
 }
 
 body {
@@ -14,45 +14,49 @@ body {
 }
 
 main {
-  .react-parallax {
-    box-shadow: $theme-shadow;
-    overflow: hidden;
+  box-shadow: $theme-shadow;
+  overflow: hidden;
+  position: relative;
+
+  section {
+    height: 100vh;
+    max-height: 1600px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  img:not(#mainLogo) {
+    max-width: none !important;
+  }
+
+  // h3 positioning classes
+  .header-right-container {
+    @extend %flex-header;
+    justify-content: flex-end;
+  }
+
+  .header-center-container {
+    @extend %flex-header;
+    justify-content: center;
+  }
+
+  // Titles with border
+  h3.title {
+    border: 5px solid $theme-white;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    padding: 15px;
+    width: 15rem;
+  }
+
+  .panel-text {
+    color: $theme-white !important;
+    padding: 2.5rem;
     position: relative;
 
-    img:not(#mainLogo) {
-      max-width: none !important;
-    }
-
-    // h3 positioning classes
-    .header-right-container {
-      @extend %flex-header;
-      justify-content: flex-end;
-    }
-
-    .header-center-container {
-      @extend %flex-header;
-      justify-content: center;
-    }
-
-    // Titles with border
-    h3.title {
-      border: 5px solid $theme-white;
-      margin-bottom: 1rem;
-      text-align: center;
-      font-size: 2rem;
-      padding: 15px;
-      width: 15rem;
-    }
-
-    .panel-text {
+    * {
       color: $theme-white !important;
-      padding: 2.5rem;
-      position: relative;
-      top: calc(10vh / 2);
-
-      * {
-        color: $theme-white !important;
-      }
     }
   }
 }

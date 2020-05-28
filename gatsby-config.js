@@ -1,4 +1,5 @@
 const config = require("./config/website");
+const path = require(`path`);
 
 module.exports = {
 	siteMetadata: {
@@ -12,6 +13,19 @@ module.exports = {
 			options: {
 				omitGoogleFont: true,
 				pathToConfigModule: "src/utils/typography.tsx"
+			}
+		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				name: `images`,
+				path: path.join(__dirname, `src`, `_serve`)
+			}
+		},
+		{
+			resolve: `gatsby-plugin-canonical-urls`,
+			options: {
+				siteUrl: `https://madbatterbake.com`
 			}
 		},
 		"gatsby-plugin-sass",
