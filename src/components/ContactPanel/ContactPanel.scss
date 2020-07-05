@@ -13,9 +13,11 @@ input[type="date"]::-webkit-input-placeholder {
 section#contact {
   display: flex;
   justify-content: center;
+  height: fit-content;
   min-height: 1100px;
 
   div:first-of-type {
+    margin-top: 1rem;
     width: 100%;
   }
 
