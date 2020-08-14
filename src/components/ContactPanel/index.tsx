@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { DateInput } from "semantic-ui-calendar-react";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
+import { ImgurData } from "../../globals";
 import { ISectionProps } from "../../pages";
 import { formDataSet, formErrorSet } from "../../store/actions";
 import { IContactFormValues, initialFormValues } from "../../store/reducers/formDataReducer";
@@ -461,7 +462,7 @@ const postImgurImage = (data: FormData) => {
  */
 const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.Element => {
 	const [dateWarning, setDateWarning] = useState(true);
-	const [imageLinks, setImageLinks] = useState<File[]>([]);
+	const [imageLinks, setImageLinks] = useState<string[]>([]);
 	const [pictures, setPictures] = useState<File[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(true);
@@ -584,7 +585,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 				return Promise.all(reqs).then(async (responses) => {
 					for (const res of responses) {
 						const json = await res.json();
-						const { link } = json.data;
+						const { link } = json.data as ImgurData;
 						setImageLinks([...imageLinks, link]);
 					}
 
@@ -594,9 +595,9 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 				return fetch(emailURL, {
 					method: "POST",
 					body: JSON.stringify({
-						token,
+						...props.formData,
 						imageLinks,
-						...props.formData
+						token
 					})
 				});
 			}).then(() => {
