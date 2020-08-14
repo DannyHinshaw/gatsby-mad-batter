@@ -2,6 +2,7 @@ import BackgroundImage from "gatsby-background-image";
 import * as React from "react";
 import { ComponentType, FormEvent, useEffect, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import ImageUploader from "react-images-upload";
 import { connect } from "react-redux";
 import { DateInput } from "semantic-ui-calendar-react";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
@@ -286,6 +287,11 @@ const BLACK_OUT_DATES: string[] = [
 	"8-21-2020",
 	"8-22-2020",
 	"8-23-2020",
+	"8-24-2020",
+	"8-25-2020",
+	"8-26-2020",
+	"8-27-2020",
+	"8-28-2020",
 	"8-30-2020",
 
 	"9-03-2020",
@@ -332,6 +338,7 @@ const BLACK_OUT_DATES: string[] = [
 	"1-6-2021",
 	"1-7-2021",
 	"1-8-2021",
+	"7-31-2021",
 
 	// 2020 Sunday/Monday Blocks
 	"3-02-2020",
@@ -382,7 +389,9 @@ const BLACK_OUT_DATES: string[] = [
 	"12-21-2020",
 	"12-28-2020"
 ];
-const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
+
+const functionsBaseURL: string = "http://localhost:9000/.netlify/functions/";
+// const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
 const emailURL: string = functionsBaseURL.concat("email");
 
@@ -434,6 +443,17 @@ const humanFriendlyDate = (dateString: string): string => {
 	return `${month}-${day}-${year}`;
 };
 
+
+// SAUCE: https://jsfiddle.net/2hmxt03m/2/
+const postImgurImage = (data: FormData) => {
+	const apiUrl = "https://api.imgur.com/3/image";
+	return fetch(apiUrl, {
+		headers: { Authorization: "Client-ID 3f60fce07d0722b" },
+		method: "POST",
+		body: data
+	});
+};
+
 /**
  * Main contact form component.
  * @returns {JSX.Element}
@@ -441,9 +461,12 @@ const humanFriendlyDate = (dateString: string): string => {
  */
 const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.Element => {
 	const [dateWarning, setDateWarning] = useState(true);
+	const [imageLinks, setImageLinks] = useState<File[]>([]);
+	const [pictures, setPictures] = useState<File[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(true);
 	const [error, setError] = useState(true);
+
 	const forceUpdate = useForceUpdate();
 	const reBackwardsDate: RegExp = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -457,6 +480,44 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 			currPicker.setAttribute("readOnly", "true");
 		}));
 	}, []);
+
+	// Inject picture file names into component
+	useEffect(() => {
+		const picsLen = pictures.length;
+		if (!picsLen) {
+			return;
+		}
+
+		const button = document.querySelector(".chooseFileButton ") as HTMLButtonElement;
+		if (picsLen >= 3) {
+			button.style.backgroundColor = "#828ca0";
+			button.disabled = true;
+		} else {
+			button.style.backgroundColor = "#4d76cc";
+			button.disabled = false;
+		}
+
+		const imgErrEl = document.querySelector(".errorsContainer");
+		if (!imgErrEl) {
+			return;
+		}
+
+		const namesContainer = document.getElementById("namesContainer");
+		if (!namesContainer) {
+			imgErrEl.insertAdjacentHTML("afterend", `<div id="namesContainer"></div>`);
+		}
+
+		const container = document.getElementById("namesContainer");
+		if (container) {
+			container.innerHTML = pictures.map(picFile => {
+				return `<p>${picFile.name}</p>`;
+			}).join("");
+		}
+	}, [pictures]);
+
+	const onImageDrop = (files: File[], pics: string[]) => {
+		setPictures(files);
+	};
 
 	const handleInputChange = (e: any, { name, value }: any) => {
 		if (props.formData.hasOwnProperty(name)) {
@@ -513,10 +574,32 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 		return fetch(tokenURL)
 			.then(res => res.json())
-			.then(({ token }) => fetch(emailURL, {
-				method: "POST",
-				body: JSON.stringify({ token, ...props.formData })
-			})).then(() => {
+			.then(({ token }) => {
+				const reqs = pictures.map(file => {
+					const formData = new FormData();
+					formData.append("image", file);
+					return postImgurImage(formData);
+				});
+
+				return Promise.all(reqs).then(async (responses) => {
+					for (const res of responses) {
+						const json = await res.json();
+						const { link } = json.data;
+						setImageLinks([...imageLinks, link]);
+					}
+
+					return token;
+				});
+			}).then((token) => {
+				return fetch(emailURL, {
+					method: "POST",
+					body: JSON.stringify({
+						token,
+						imageLinks,
+						...props.formData
+					})
+				});
+			}).then(() => {
 				setLoading(false);
 				setSuccess(false);
 				props.formDataSet(initialFormValues);
@@ -655,6 +738,23 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 							/>
 						</label>
 					</Form.Group>
+
+					<br />
+					<Form.Group grouped={true}>
+						<label>
+							{/*TODO: Ref this el and inject text previews of files*/}
+							Reference Photos?
+							<ImageUploader
+								label={"Max images 3 (size: 5mb): .jpg, .gif, .png, .webp"}
+								imgExtension={[".jpg", ".jpeg", ".png", ".webp"]}
+								onChange={onImageDrop}
+								maxFileSize={5242880}
+								withPreview={false}
+								withIcon={false}
+							/>
+						</label>
+					</Form.Group>
+
 					<Form.Input
 						fluid={true}
 						name="subject"
