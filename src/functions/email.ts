@@ -109,6 +109,10 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 	const hasAllKeys: boolean = bodyKeys.every(k => keys.includes(k));
 	if (discrepantKeys || !hasAllKeys) {
 		logInfo(422, event, context);
+		console.log("bodyKeys::", bodyKeys);
+		console.log("keys::", keys);
+		console.log("discrepantKeys::", discrepantKeys);
+		console.log("hasAllKeys::", hasAllKeys);
 		return { statusCode: 422, body: "Unprocessable Entity" };
 	}
 
