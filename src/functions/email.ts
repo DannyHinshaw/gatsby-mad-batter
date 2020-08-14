@@ -57,16 +57,16 @@ const constructEmailData = (messageData: IContactFormValues): SendData => {
 		from: EMAIL_FROM,
 		subject: `New message from madbatterbake.com! Subject: ${subject}`,
 		text: `
-New message from madbatterbake.com!\n
+New message from madbatterbake.com!
 
-From: ${name} - ${email} - ${phone}\n
-Event Date: ${date}\n
-Event Zip Code: ${zip}\n
-Gluten Free: ${glutenFree}\n
-Number of People: ${people}\n
-Message: \n${message}\n
-
+From: ${name} - ${email} - ${phone}
+Event Date: ${date}
+Event Zip Code: ${zip}
+Gluten Free: ${glutenFree}
+Number of People: ${people}
+Message: \n${message}
 ${uploadedImages}
+
 This is an automated email from your main man, love you!
 		`
 	};
