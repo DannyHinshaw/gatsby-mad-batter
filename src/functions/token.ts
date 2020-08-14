@@ -56,6 +56,7 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 	logInfo(200, event, context);
 	return {
 		statusCode: 200,
+		// headers: responseHeaders,
 		body: JSON.stringify({
 			token: ACCESS_TOKEN || null
 		})
