@@ -17,6 +17,7 @@ interface IContactFormValues {
 	subject: string
 	message: string
 	glutenFree: string
+	imageLinks: string[]
 }
 
 interface IRequestData extends IContactFormValues {
@@ -45,7 +46,11 @@ const mailgun = require("mailgun-js")({ apiKey: MAILGUN_API_KEY, domain: MAILGUN
  * @returns {MailOptions}
  */
 const constructEmailData = (messageData: IContactFormValues): SendData => {
-	const { date, name, email, glutenFree, phone, people, subject, message, zip } = messageData;
+	const { date, name, email, glutenFree, imagelinks, phone, people, subject, message, zip } = messageData;
+	const uploadedImages = imagelinks.length
+		? ["Uploaded Images:", ...imagelinks].join("\n")
+		: null;
+
 	return {
 		to: EMAIL_TO as string,
 		from: EMAIL_FROM,
@@ -60,8 +65,9 @@ Gluten Free: ${glutenFree}\n
 Number of People: ${people}\n
 Message: \n${message}\n
 
+${uploadedImages}
 This is an automated email from your main man, love you!
-		`,
+		`
 	};
 };
 
@@ -111,6 +117,7 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 
 			return {
 				statusCode: 200,
+				// headers: responseHeaders,
 				body: JSON.stringify(res)
 			};
 		}).catch(err => {
