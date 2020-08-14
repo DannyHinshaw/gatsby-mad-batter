@@ -33,7 +33,8 @@ const keys: string[] = [
 	"people",
 	"subject",
 	"message",
-	"glutenFree"
+	"glutenFree",
+	"imageLinks"
 ];
 
 // Email cron constants
