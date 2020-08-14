@@ -391,8 +391,8 @@ const BLACK_OUT_DATES: string[] = [
 	"12-28-2020"
 ];
 
-const functionsBaseURL: string = "http://localhost:9000/.netlify/functions/";
-// const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
+// const functionsBaseURL: string = "http://localhost:9000/.netlify/functions/";
+const functionsBaseURL: string = "https://madbatterbake.com/.netlify/functions/";
 const tokenURL: string = functionsBaseURL.concat("token");
 const emailURL: string = functionsBaseURL.concat("email");
 
