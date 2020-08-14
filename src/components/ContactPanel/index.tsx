@@ -462,7 +462,6 @@ const postImgurImage = (data: FormData) => {
  */
 const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.Element => {
 	const [dateWarning, setDateWarning] = useState(true);
-	const [imageLinks, setImageLinks] = useState<string[]>([]);
 	const [pictures, setPictures] = useState<File[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(true);
@@ -573,6 +572,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 			return forceUpdate();
 		}
 
+		let imageLinks: string[] = [];
 		return fetch(tokenURL)
 			.then(res => res.json())
 			.then(({ token }) => {
@@ -586,7 +586,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 					for (const res of responses) {
 						const json = await res.json();
 						const { link } = json.data as ImgurData;
-						setImageLinks([...imageLinks, link]);
+						imageLinks = [...imageLinks, link];
 					}
 
 					return token;
