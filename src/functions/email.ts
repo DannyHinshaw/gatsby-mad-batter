@@ -47,9 +47,9 @@ const mailgun = require("mailgun-js")({ apiKey: MAILGUN_API_KEY, domain: MAILGUN
  * @returns {MailOptions}
  */
 const constructEmailData = (messageData: IContactFormValues): SendData => {
-	const { date, name, email, glutenFree, imagelinks, phone, people, subject, message, zip } = messageData;
-	const uploadedImages = imagelinks.length
-		? ["Uploaded Images:", ...imagelinks].join("\n")
+	const { date, name, email, glutenFree, imageLinks, phone, people, subject, message, zip } = messageData;
+	const uploadedImages = imageLinks.length
+		? ["Uploaded Images:", ...imageLinks].join("\n")
 		: null;
 
 	return {
