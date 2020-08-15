@@ -603,6 +603,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 			}).then(() => {
 				setLoading(false);
 				setSuccess(false);
+				imageLinks = [];
 				props.formDataSet(initialFormValues);
 			}).catch(err => {
 				console.error(err);
