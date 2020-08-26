@@ -123,6 +123,9 @@ import "./ContactPanel.scss";
 // 	"12-30-2019"
 // ];
 
+// FIXME: WARNING
+//   We have to leave at least one day of the month unblocked or semantic-ui-calendar-react throws an error.
+//   Issue filed here: https://github.com/arfedulov/semantic-ui-calendar-react/issues/202
 const BLACK_OUT_DATES: string[] = [
 
 	// 2020!!!
@@ -292,12 +295,14 @@ const BLACK_OUT_DATES: string[] = [
 	"8-22-2020",
 	"8-23-2020",
 	"8-24-2020",
-	"8-25-2020",
+	// "8-25-2020", // Prevent calendar component from breaking
 	"8-26-2020",
 	"8-27-2020",
 	"8-28-2020",
 	"8-30-2020",
 
+	"9-01-2020",
+	"9-02-2020",
 	"9-03-2020",
 	"9-04-2020",
 	"9-05-2020",
