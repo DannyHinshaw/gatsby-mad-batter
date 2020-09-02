@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import { graphql } from "gatsby";
 import * as React from "react";
 import { ComponentType } from "react";
@@ -13,6 +15,15 @@ import TestimonialPanel from "../components/TestimonialsPanel";
 import { IFluidImage, IImageNode } from "../globals";
 import { store } from "../store";
 import "./Index.scss";
+
+
+Sentry.init({
+	dsn: "https://86ccea0ab25c45a1b0d3890da143663e@o273389.ingest.sentry.io/5415325",
+	integrations: [
+		new Integrations.BrowserTracing()
+	],
+	tracesSampleRate: 1.0
+});
 
 
 export interface ISectionProps {

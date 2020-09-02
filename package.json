@@ -11,6 +11,8 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "@sentry/react": "^5.22.3",
+    "@sentry/tracing": "^5.22.3",
     "cloudinary-core": "^2.7.4",
     "gatsby": "^2.22.11",
     "gatsby-background-image": "^1.1.1",

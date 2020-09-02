@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import BackgroundImage from "gatsby-background-image";
 import * as React from "react";
 import { ComponentType, FormEvent, useEffect, useState } from "react";
@@ -614,6 +615,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 				imageLinks = [];
 				props.formDataSet(initialFormValues);
 			}).catch(err => {
+				Sentry.captureException(err);
 				console.error(err);
 				setLoading(false);
 				setError(false);

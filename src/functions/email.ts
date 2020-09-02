@@ -82,7 +82,7 @@ const sendEmail = (messageData: IContactFormValues): Promise<any> => {
 		.then((t: SendResponse) => {
 			console.log(200, "Email sent successfully.");
 			return { success: 200, message: "Email sent" };
-		}).catch(console.error);
+		});
 };
 
 /**
@@ -128,7 +128,7 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 		}).catch(err => {
 			const formattedError = JSON.stringify(err, null, 2);
 			logInfo(500, event, context);
-			console.error(err);
+			console.error("Error sending email::", err);
 
 			return {
 				statusCode: 500,
