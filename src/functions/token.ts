@@ -12,19 +12,27 @@ const validReferers: string[] = [
 ];
 
 /**
- * Check referer header against allowed.
+ * Extracts referer from headers.
  * @param {APIGatewayEvent} event
- * @returns {any}
+ * @returns {string}
  */
-const isValidReferer = (event: APIGatewayEvent) => {
+const getReferer = (event: APIGatewayEvent): string | null => {
 	const headers: IHeaders = event.headers;
 	if (!headers) {
-		return false;
+		return null;
 	}
 
-	const refHeader: string = headers["referer"]; // tslint:disable-line
-	return refHeader && validReferers.some((r: string) => {
-		return refHeader === r || refHeader === r.concat("/");
+	return headers.referer;
+};
+
+/**
+ * Check referer header against allowed.
+ * @param {string} referer
+ * @returns {any}
+ */
+const isValidReferer = (referer: string) => {
+	return referer && validReferers.some((r: string) => {
+		return referer === r || referer === r.concat("/");
 	});
 };
 
@@ -44,12 +52,21 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 		};
 	}
 
-	// Only allow requests from website
-	if (!isValidReferer(event)) {
+	const referer = getReferer(event);
+	if (!referer) {
 		logInfo(401, event, context);
 		return {
 			statusCode: 401,
-			body: "Invalid referer"
+			body: "No referer header present on request."
+		};
+	}
+
+	// Only allow requests from website
+	if (!isValidReferer(referer)) {
+		logInfo(401, event, context);
+		return {
+			statusCode: 401,
+			body: `Invalid referer in request header: ${referer}`
 		};
 	}
 

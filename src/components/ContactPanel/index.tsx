@@ -598,8 +598,14 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 		let imageLinks: string[] = [];
 		return fetch(tokenURL)
-			.then(res => res.json())
-			.then(({ token }) => {
+			.then(async (res) => {
+				if (res.status === 401) {
+					const body = await res.text();
+					throw Error(body);
+				}
+
+				return res.json();
+			}).then(({ token }) => {
 				const reqs = pictures.map(file => {
 					const formData = new FormData();
 					formData.append("image", file);
