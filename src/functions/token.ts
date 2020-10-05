@@ -64,9 +64,11 @@ export const handler: Handler = async (event: APIGatewayEvent, context: Context)
 	// Only allow requests from website
 	if (!isValidReferer(referer)) {
 		logInfo(401, event, context);
+		const msg = `Invalid referer in request header: ${referer}`;
+		console.log(msg);
 		return {
 			statusCode: 401,
-			body: `Invalid referer in request header: ${referer}`
+			body: msg
 		};
 	}
 
