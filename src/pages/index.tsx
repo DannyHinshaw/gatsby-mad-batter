@@ -1,6 +1,7 @@
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { graphql } from "gatsby";
+import "isomorphic-fetch";
 import * as React from "react";
 import { ComponentType } from "react";
 import { Provider } from "react-redux";
