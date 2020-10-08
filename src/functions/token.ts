@@ -32,7 +32,7 @@ const getReferer = (event: APIGatewayEvent): string | null => {
  */
 const isValidReferer = (referer: string) => {
 	return referer && validReferers.some((r: string) => {
-		return referer === r || referer === r.concat("/");
+		return referer.startsWith(r);
 	});
 };
 
