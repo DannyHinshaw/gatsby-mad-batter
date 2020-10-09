@@ -23,6 +23,10 @@
 
     #special {
       margin-top: 3rem;
+
+      strong {
+        color: gold !important;
+      }
     }
 
     #promo, #special {
@@ -42,5 +46,9 @@
         overflow: hidden;
       }
     }
+  }
+
+  .align-left {
+    text-align: left;
   }
 }

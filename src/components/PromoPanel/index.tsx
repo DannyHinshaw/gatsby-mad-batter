@@ -19,26 +19,29 @@ const PromoPanel = (): JSX.Element => {
 
 					<img className="img-circle" src="/imgs/fall-sampler.jpg" alt="Fall Sampler Pack" />
 
-					<p>
-						<strong>What: </strong> Sampler pack of cupcakes (red velvet, mexican hot chocolate, s'mores, and pumpkin),
-						macarons (vanilla and hazelnut), and mini pies (pumpkin and apple)=12 pieces in total
-					</p>
+					<div className="align-left">
+						<p>
+							<strong>What: </strong> Sampler pack of cupcakes (red velvet, mexican hot chocolate, s'mores, and
+							pumpkin),
+							macarons (vanilla and hazelnut), and mini pies (pumpkin and apple)=12 pieces in total
+						</p>
 
-					<p>
-						<strong>When: </strong> For delivery ONLY on Wednesdays, every week for the month of
-						October (first come first serve), from 8am-2pm
-					</p>
+						<p>
+							<strong>When: </strong> For delivery ONLY on Wednesdays, every week for the month of
+							October (first come first serve), from 8am-2pm
+						</p>
 
-					<p>
-						<strong>How Much: </strong> $30 + delivery (varies depending on where you're located)
-					</p>
+						<p>
+							<strong>How Much: </strong> $30 + delivery (varies depending on where you're located)
+						</p>
 
-					<p>
-						*Sampler pack only available for Wednesday deliveries, but individual items/flavors
-						are available full time with a minimum order requirement of one dozen.
-						<br />
-						<i>**Contains nuts/dairy/gluten</i>
-					</p>
+						<p>
+							<i>*Sampler pack only available for Wednesday deliveries, but individual items/flavors
+								are available full time with a minimum order requirement of one dozen.</i>
+							<br />
+							<i>**Contains nuts/dairy/gluten</i>
+						</p>
+					</div>
 				</div>
 
 				<br />
