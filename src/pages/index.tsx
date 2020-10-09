@@ -11,6 +11,7 @@ import ContactPanel from "../components/ContactPanel";
 import GalleryPanel from "../components/GalleryPanel";
 import MainPanel from "../components/MainPanel";
 import Navbar from "../components/Navbar";
+import PromoPanel from "../components/PromoPanel";
 import SEO from "../components/SEO";
 import TestimonialPanel from "../components/TestimonialsPanel";
 import { IFluidImage, IImageNode } from "../globals";
@@ -85,7 +86,7 @@ const Index: ComponentType<IndexPageProps> = (props: IndexPageProps) => {
 			<Navbar />
 			<main>
 				<MainPanel bgImage={images[mainBG].fluid} />
-				{/*<PromoPanel />*/}
+				<PromoPanel />
 				<AboutPanel />
 				<TestimonialPanel bgImage={images[testimonialsBG].fluid} />
 				{/*<FlavorsPanel />*/}

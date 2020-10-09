@@ -4,7 +4,7 @@ import "./PromoPanel.scss";
 
 const PromoPanel = (): JSX.Element => {
 	return (
-		<section id="promo">
+		<section id="promo" style={{ height: "2000px", maxHeight: "none" }}>
 			<div id="promoText" className="panel-text">
 				<div className="title-container">
 					<h3 className="title">
@@ -12,49 +12,56 @@ const PromoPanel = (): JSX.Element => {
 					</h3>
 				</div>
 
-				{/*
-					<div id="special" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
-						<h1>4th OF JULY SPECIAL</h1>
+				<div id="special" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
+					<h1>
+						OCTOBER SAMPLER PACK!
+					</h1>
+
+					<img className="img-circle" src="/imgs/fall-sampler.jpg" alt="Fall Sampler Pack" />
+
+					<p>
+						<strong>What: </strong> Sampler pack of cupcakes (red velvet, mexican hot chocolate, s'mores, and pumpkin),
+						macarons (vanilla and hazelnut), and mini pies (pumpkin and apple)=12 pieces in total
+					</p>
+
+					<p>
+						<strong>When: </strong> For delivery ONLY on Wednesdays, every week for the month of
+						October (first come first serve), from 8am-2pm
+					</p>
+
+					<p>
+						<strong>How Much: </strong> $30 + delivery (varies depending on where you're located)
+					</p>
+
+					<p>
+						*Sampler pack only available for Wednesday deliveries, but individual items/flavors
+						are available full time with a minimum order requirement of one dozen.
 						<br />
-						<p>
-							<strong>What:</strong> 8" layer cake (your choice of chocolate, vanilla, or red velvet), decorated with
-							red/white/blue
-						</p>
+						<i>**Contains nuts/dairy/gluten</i>
+					</p>
+				</div>
 
-						<p>
-							<strong>When:</strong> for delivery July 4th, (8am-1pm)
-						</p>
-
-						<p>
-							<strong>How Much:</strong> $35 (delivery not included)
-						</p>
-
-						<p>
-							Contact me to get your order in! And of course,
-						</p>
-
-						<p>
-							I'm also still taking orders for any other goodies you may want😁
-						</p>
-					</div>
-
-					<br />
-					<hr />
-*/}
+				<br />
+				<hr />
 
 				<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
-					<h1>FRESH MAD BATTER TEES!</h1>
-					<img className="img-circle" src="/imgs/mbc-tee.jpg" alt="MBC-Tee" />
-					<p>
-						Variety of styles available, starting @ $21.99!
-					</p>
+					<h1>THIS WEEK AT SECOND WAVE CAFE!</h1>
+					<i style={{ fontSize: "20px" }}>529 S Lake Dr, Lexington, SC 29072</i>
 
-					<p>
-						<a target="_blank" href="https://www.bonfire.com/mad-batter-cupcakery-shirts/">
-							To shop click here!
-						</a>
-					</p>
+					<br />
 
+					<img className="img-circle" src="/imgs/spooky-cupcake.jpg" alt="Second Wave" />
+					<p>
+						You can pick up these flavors this week at <a href="https://www.facebook.com/SecondWaveCoffeeBooks"
+						                                              target="_blank" rel="noreferrer">Second Wave Cafe!</a>
+					</p>
+					<p>
+						• Pumpkin Cupcake • Classic Vanilla • Vegan Vanilla • Brownies
+						• GLuten Free Chocolate • Vanilla Macarons • S'mores Macarons
+					</p>
+					<i>
+						Get them while supplies last!
+					</i>
 				</div>
 			</div>
 		</section>

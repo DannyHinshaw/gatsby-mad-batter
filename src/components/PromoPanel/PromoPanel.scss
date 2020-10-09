@@ -5,7 +5,7 @@
 
   #promoText {
     max-width: 1000px;
-    margin: 2rem auto 10rem auto;
+    margin: 0 auto 10rem auto;
 
     .title-container {
       justify-content: center;
@@ -17,16 +17,15 @@
     }
 
     hr {
-      border-top: 1px solid #565555;
+      border-top: 1px solid #b4a9a9;
       margin: 5rem auto;
     }
 
     #special {
       margin-top: 3rem;
-      padding-left: 5%;
     }
 
-    #promo {
+    #promo, #special {
       text-align: center;
 
       p {
@@ -36,10 +35,10 @@
       }
 
       .img-circle {
-        height: 45vh;
+        height: 35vh;
         border-radius: 50%;
         max-height: 750px;
-        margin: 3rem auto;
+        margin: 2rem auto;
         overflow: hidden;
       }
     }
