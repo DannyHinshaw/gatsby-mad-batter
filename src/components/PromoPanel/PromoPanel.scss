@@ -1,7 +1,25 @@
 @import "../../style/theme";
 
-#promo {
+section#promo {
   background-color: $theme-blue !important;
+  height: 2000px;
+  max-height: none;
+
+  @media screen and (max-width: 750px) {
+    height: 2100px;
+  }
+  @media screen and (max-width: 590px) {
+    height: 2200px;
+  }
+  @media screen and (max-width: 525px) {
+    height: 2300px;
+  }
+  @media screen and (max-width: 450px) {
+    height: 2400px;
+  }
+  @media screen and (max-width: 425px) {
+    height: 2700px;
+  }
 
   #promoText {
     max-width: 1000px;

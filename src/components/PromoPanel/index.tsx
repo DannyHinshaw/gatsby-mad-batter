@@ -4,7 +4,7 @@ import "./PromoPanel.scss";
 
 const PromoPanel = (): JSX.Element => {
 	return (
-		<section id="promo" style={{ height: "2000px", maxHeight: "none" }}>
+		<section id="promo">
 			<div id="promoText" className="panel-text">
 				<div className="title-container">
 					<h3 className="title">
