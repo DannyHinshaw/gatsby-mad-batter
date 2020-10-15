@@ -59,8 +59,8 @@ const PromoPanel = (): JSX.Element => {
 						                                              target="_blank" rel="noreferrer">Second Wave Cafe!</a>
 					</p>
 					<p>
-						• Pumpkin Cupcake • Classic Vanilla • Vegan Vanilla • Brownies
-						• GLuten Free Chocolate • Vanilla Macarons • S'mores Macarons
+						• Pumpkin Cupcake • Classic Vanilla • Vegan Vanilla w/Chocolate Icing • Brownies
+						• Gluten-Free Vanilla w/Chocolate Buttercream • Macarons (Vanilla, S'mores & Hazelnut)
 					</p>
 					<i>
 						Get them while supplies last!
