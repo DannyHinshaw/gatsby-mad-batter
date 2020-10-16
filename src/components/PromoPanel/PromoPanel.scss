@@ -20,6 +20,9 @@ section#promo {
   @media screen and (max-width: 425px) {
     height: 2700px;
   }
+  @media screen and (max-width: 355px) {
+    height: 2900px;
+  }
 
   #promoText {
     max-width: 1000px;
@@ -57,7 +60,7 @@ section#promo {
       }
 
       .img-circle {
-        height: 325px;
+        height: 225px;
         border-radius: 50%;
         margin: 2rem auto;
         overflow: hidden;
