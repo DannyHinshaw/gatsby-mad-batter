@@ -5,7 +5,7 @@ import { ComponentType, FormEvent, useEffect, useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import ImageUploader from "react-images-upload";
 import { connect } from "react-redux";
-import { DateInput } from "semantic-ui-calendar-react";
+import { DateInput } from "semantic-ui-calendar-react-yz";
 import { DropdownItemProps, Form, FormProps } from "semantic-ui-react";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import { ImgurData } from "../../globals";
@@ -346,7 +346,16 @@ const BLACK_OUT_DATES: string[] = [
 	"10-19-2020",
 	"10-20-2020",
 	"10-21-2020",
+	"10-22-2020",
+	"10-23-2020",
+	"10-24-2020",
 	"10-25-2020",
+	"10-26-2020",
+	"10-27-2020",
+	"10-28-2020",
+	"10-29-2020",
+	"10-30-2020",
+	"10-31-2020",
 
 	"11-01-2020",
 	"11-08-2020",

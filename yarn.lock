@@ -13519,10 +13519,10 @@ selfsigned@^1.10.7:
   dependencies:
     node-forge "0.9.0"
 
-semantic-ui-calendar-react@^0.15.3:
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/semantic-ui-calendar-react/-/semantic-ui-calendar-react-0.15.3.tgz#eb25826076a2967d9bb04e0567824366f5eb6fe4"
-  integrity sha512-cXlg/dJf0z/dydnol1GCy9ssccXBAGYhmka9W2KNXqqW+B0mgPhu6ugWOjGD4i99e3dnNl1QVqYvQpQcpkcEIg==
+semantic-ui-calendar-react-yz@^0.16.3:
+  version "0.16.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-calendar-react-yz/-/semantic-ui-calendar-react-yz-0.16.3.tgz#3ff15de19ad8d4873dc8cc8325580c102c540c40"
+  integrity sha512-GIDtHu/ZaQdrd5gBAEtH7KP3NCWAU5Z2DJDG8XCvGz5PjGOSxASSIntTkzIc1GH6cb84wuylCLHSB6OdPNPCHA==
   dependencies:
     keyboard-key "^1.0.2"
     lodash "^4.17.15"
