@@ -4,7 +4,7 @@ import "./PromoPanel.scss";
 
 const PromoPanel = (): JSX.Element => {
 	return (
-		<section id="promo">
+		<section id="promo" className={"single"}>
 			<div id="promoText" className="panel-text">
 				<div className="title-container">
 					<h3 className="title">
@@ -12,40 +12,40 @@ const PromoPanel = (): JSX.Element => {
 					</h3>
 				</div>
 
-				<div id="special" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
-					<h1>
-						OCTOBER SAMPLER PACK!
-					</h1>
+				{/*<div id="special" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>*/}
+				{/*	<h1>*/}
+				{/*		OCTOBER SAMPLER PACK!*/}
+				{/*	</h1>*/}
 
-					<img className="img-circle" src="/imgs/fall-sampler.jpg" alt="Fall Sampler Pack" />
+				{/*	<img className="img-circle" src="/imgs/fall-sampler.jpg" alt="Fall Sampler Pack" />*/}
 
-					<div className="align-left">
-						<p>
-							<strong>What: </strong> Sampler pack of cupcakes (red velvet, mexican hot chocolate, s'mores, and
-							pumpkin),
-							macarons (vanilla and hazelnut), and mini pies (pumpkin and apple)=12 pieces in total
-						</p>
+				{/*	<div className="align-left">*/}
+				{/*		<p>*/}
+				{/*			<strong>What: </strong> Sampler pack of cupcakes (red velvet, mexican hot chocolate, s'mores, and*/}
+				{/*			pumpkin),*/}
+				{/*			macarons (vanilla and hazelnut), and mini pies (pumpkin and apple)=12 pieces in total*/}
+				{/*		</p>*/}
 
-						<p>
-							<strong>When: </strong> For delivery ONLY on Wednesdays, every week for the month of
-							October (first come first serve), from 8am-2pm
-						</p>
+				{/*		<p>*/}
+				{/*			<strong>When: </strong> For delivery ONLY on Wednesdays, every week for the month of*/}
+				{/*			October (first come first serve), from 8am-2pm*/}
+				{/*		</p>*/}
 
-						<p>
-							<strong>How Much: </strong> $30 + delivery (varies depending on where you're located)
-						</p>
+				{/*		<p>*/}
+				{/*			<strong>How Much: </strong> $30 + delivery (varies depending on where you're located)*/}
+				{/*		</p>*/}
 
-						<p>
-							<i>*Sampler pack only available for Wednesday deliveries, but individual items/flavors
-								are available full time with a minimum order requirement of one dozen.</i>
-							<br />
-							<i>**Contains nuts/dairy/gluten</i>
-						</p>
-					</div>
-				</div>
+				{/*		<p>*/}
+				{/*			<i>*Sampler pack only available for Wednesday deliveries, but individual items/flavors*/}
+				{/*				are available full time with a minimum order requirement of one dozen.</i>*/}
+				{/*			<br />*/}
+				{/*			<i>**Contains nuts/dairy/gluten</i>*/}
+				{/*		</p>*/}
+				{/*	</div>*/}
+				{/*</div>*/}
 
-				<br />
-				<hr />
+				{/*<br />*/}
+				{/*<hr />*/}
 
 				<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
 					<h1>THIS WEEK AT SECOND WAVE CAFE!</h1>
