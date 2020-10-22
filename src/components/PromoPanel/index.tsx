@@ -60,7 +60,7 @@ const PromoPanel = (): JSX.Element => {
 					</p>
 					<p>
 						• Pumpkin Cupcake • Funfetti Cupcakes
-						• Vegan Chocolate Cupcakes
+						• Vegan Vanilla Cupcakes w/Chocolate Icing
 						• Brownies
 						• Macarons (Vanilla, S'mores & Hazelnut)
 						• Gluten Free Vanilla Cupcakes w/Cinnamon Icing
