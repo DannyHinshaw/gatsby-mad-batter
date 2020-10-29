@@ -59,9 +59,11 @@ const PromoPanel = (): JSX.Element => {
 						                                              target="_blank" rel="noreferrer">Second Wave Cafe!</a>
 					</p>
 					<p>
-						• Pumpkin Cupcake • Funfetti Cupcakes
-						• Vegan Vanilla Cupcakes w/Chocolate Icing
+						• Pumpkin Cupcake
+						• Funfetti Cupcakes
+						• Red Velvet Cupcakes
 						• Brownies
+						• Vegan Vanilla Cupcakes w/Chocolate Icing
 						• Macarons (Vanilla, S'mores & Hazelnut)
 						• Gluten Free Vanilla Cupcakes w/Cinnamon Icing
 					</p>
