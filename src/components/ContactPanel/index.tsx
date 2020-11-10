@@ -810,7 +810,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 			<div id="socialLinks">
 				<a
-					href="https://www.facebook.com/madefromscratchbaking/"
+					href="https://www.facebook.com/sprinkleallthethings/"
 					rel="noreferrer noopener"
 					target="_blank"
 					title="Instagram"
