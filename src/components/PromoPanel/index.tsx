@@ -61,7 +61,7 @@ const PromoPanel = (): JSX.Element => {
 					<p>
 						• Brownies
 						• Chocolate cupcakes
-						• Gluten free vanilla cupcakes with chocolate icing
+						• Gluten free vanilla cupcakes
 					</p>
 					<i>
 						Get them while supplies last!
