@@ -48,6 +48,8 @@ const PromoPanel = (): JSX.Element => {
 				{/*<hr />*/}
 
 				<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
+					<br />
+
 					<h1>THIS WEEK AT SECOND WAVE CAFE!</h1>
 					<i style={{ fontSize: "20px" }}>529 S Lake Dr, Lexington, SC 29072</i>
 
