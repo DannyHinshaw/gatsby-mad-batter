@@ -402,6 +402,7 @@ const BLACK_OUT_DATES: string[] = [
 	"1-7-2021",
 	"1-8-2021",
 	"2-27-2021",
+	"4-16-2021",
 	"7-31-2021",
 
 	// 2020 Sunday/Monday Blocks
