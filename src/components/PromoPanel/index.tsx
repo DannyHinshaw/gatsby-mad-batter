@@ -57,14 +57,17 @@ const PromoPanel = (): JSX.Element => {
 
 					<img className="img-circle" src="/imgs/2nd-wave-cupcake.jpeg" alt="Second Wave" />
 					<p>
-						You can pick up these flavors this week at <a href="https://www.facebook.com/SecondWaveCoffeeBooks"
-						                                              target="_blank" rel="noreferrer">Second Wave Cafe!</a>
+						You can pick up these goodies at <a href="https://www.facebook.com/SecondWaveCoffeeBooks"
+						                                    target="_blank" rel="noreferrer">Second Wave Cafe!</a>
 					</p>
-					<p>
-						• Brownies
-						• Chocolate cupcakes
-						• Gluten free vanilla cupcakes
+					<p id="menuItems">
+						<p>• Brownies</p>
+						<p>• Cake Batter Macarons</p>
+						<p>• Chocolate Cupcake with Cream Cheese Icing</p>
+						<p>• Gluten-free Red Velvet Cupcake</p>
+						<p>• Vegan Vanilla Cupcake with Chocolate Icing</p>
 					</p>
+					<br />
 					<i>
 						Get them while supplies last!
 					</i>
