@@ -62,10 +62,10 @@ const PromoPanel = (): JSX.Element => {
 					</p>
 					<p id="menuItems">
 						<p>• Brownies</p>
-						<p>• Cake Batter Macarons</p>
-						<p>• Chocolate Cupcake with Cream Cheese Icing</p>
-						<p>• Gluten-free Red Velvet Cupcake</p>
-						<p>• Vegan Vanilla Cupcake with Chocolate Icing</p>
+						<p>• Lemon cupcakes</p>
+						<p>• Vanilla macarons</p>
+						<p>• Gluten free vanilla cupcakes</p>
+						<p>• Vegan vanilla with 'cake batter' icing</p>
 					</p>
 					<br />
 					<i>
