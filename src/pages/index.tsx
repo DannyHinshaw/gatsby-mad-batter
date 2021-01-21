@@ -86,7 +86,7 @@ const Index: ComponentType<IndexPageProps> = (props: IndexPageProps) => {
 			<Navbar />
 			<main>
 				<MainPanel bgImage={images[mainBG].fluid} />
-				<PromoPanel />
+				{/*<PromoPanel />*/}
 				<AboutPanel />
 				<TestimonialPanel bgImage={images[testimonialsBG].fluid} />
 				{/*<FlavorsPanel />*/}
