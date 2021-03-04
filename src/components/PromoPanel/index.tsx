@@ -61,10 +61,10 @@ const PromoPanel = (): JSX.Element => {
 						                                    target="_blank" rel="noreferrer">Second Wave Cafe!</a>
 					</p>
 					<p id="menuItems">
-						<p>• Cake Truffles (vanilla, red velvet, and chocolate)</p>
-						<p>• Gluten Free chocolate cupcakes</p>
-						<p>• Orangesicle cupcakes</p>
-						<p>• S'mores macarons</p>
+						<p>• Vegan Cookie Butter Cupcakes</p>
+						<p>• Gluten Free Vanilla Cupcakes</p>
+						<p>• Key Lime Pie Macarons</p>
+						<p>• Funfetti Cupcakes</p>
 						<p>• Brownies</p>
 					</p>
 					<br />
