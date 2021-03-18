@@ -50,7 +50,7 @@ const PromoPanel = (): JSX.Element => {
 				<div id="promo" style={{ fontSize: "1.75rem", lineHeight: "2.25rem" }}>
 					<br />
 
-					<h1>THIS WEEK AT SECOND WAVE CAFE!</h1>
+					<h1>THIS WEEK AT SECOND WAVE COFFEE!</h1>
 					<i style={{ fontSize: "20px" }}>529 S Lake Dr, Lexington, SC 29072</i>
 
 					<br />
@@ -61,10 +61,10 @@ const PromoPanel = (): JSX.Element => {
 						                                    target="_blank" rel="noreferrer">Second Wave Cafe!</a>
 					</p>
 					<p id="menuItems">
-						<p>• Vegan Cookie Butter Cupcakes</p>
 						<p>• Gluten Free Vanilla Cupcakes</p>
-						<p>• Key Lime Pie Macarons</p>
-						<p>• Funfetti Cupcakes</p>
+						<p>• Vegan Orange Cream Cupcakes</p>
+						<p>• White Almond Cupcakes</p>
+						<p>• Chocolate Macarons</p>
 						<p>• Brownies</p>
 					</p>
 					<br />
