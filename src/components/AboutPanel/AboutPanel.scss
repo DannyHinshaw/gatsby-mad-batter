@@ -10,9 +10,15 @@
   div {
     margin: 3rem auto auto;
   }
-}
 
-#cupcakeContainer {
-  height: 30vh;
-  text-align: center;
+  #logoContainer {
+    display: flex;
+    justify-content: center;
+
+    #stampLogo {
+      padding: 2.5rem;
+      width: calc(20vh * 2);
+      max-width: 50%;
+    }
+  }
 }

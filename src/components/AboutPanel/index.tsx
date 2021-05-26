@@ -1,6 +1,7 @@
 import * as React from "react";
-import { CupcakeSVG } from "../CupcakeSVG";
 import "./AboutPanel.scss";
+// @ts-ignore
+import Logo from "./mad-batter-stamp.png";
 
 const AboutPanel = (): JSX.Element => {
 	return (
@@ -15,8 +16,12 @@ const AboutPanel = (): JSX.Element => {
 					Dietary restrictions? Not an issue! MBC is knowledgeable in Gluten-Free and Vegan baking!
 				</div>
 			</div>
-			<div id="cupcakeContainer">
-				<CupcakeSVG />
+			<div id="logoContainer">
+				<img
+					src={Logo}
+					style={{ maxWidth: "1600px" }}
+					id="stampLogo"
+					alt="Logo" />
 			</div>
 		</section>
 	);
