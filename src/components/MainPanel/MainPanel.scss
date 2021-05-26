@@ -4,15 +4,12 @@
   #logoContainer {
     display: flex;
     justify-content: center;
-
-    img {
-      width: 100%;
-    }
   }
 
   #mainLogo {
     padding: 2.5rem;
     position: absolute;
-    top: calc(55vh / 2);
+    top: calc(20vh / 2);
+    width: calc(40vh * 2);
   }
 }
