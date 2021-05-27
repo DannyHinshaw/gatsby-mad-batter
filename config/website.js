@@ -7,7 +7,7 @@ module.exports = {
 	siteUrl: "https://madbatterbake.com", // Domain of your site. No trailing slash!
 	siteLanguage: "en", // Language Tag on <html> element
 	siteLogo: "/logos/logo_transparent_background-flat.png", // Used for SEO and manifest
-	siteDescription: "Bake-to-order online bakery based out of Elgin, SC.",
+	siteDescription: "Bake-to-order online bakery based out of Lexington, SC.",
 
 	// siteFBAppID: '123456789', // Facebook App ID - Optional
 	// userTwitter: '@cara', // Twitter Username
