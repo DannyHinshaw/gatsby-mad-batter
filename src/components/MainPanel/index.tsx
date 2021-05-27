@@ -12,7 +12,6 @@ const MainPanel: ComponentType<ISectionProps> = ({ bgImage }): JSX.Element => (
 		<div id="logoContainer">
 			<img
 				src={Logo}
-				style={{ maxWidth: "1600px" }}
 				id="mainLogo"
 				alt="Logo" />
 		</div>
