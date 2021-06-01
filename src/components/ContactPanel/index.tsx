@@ -280,7 +280,8 @@ const numberOfPeopleOptions: DropdownItemProps[] = [
 	"60 - 70",
 	"70 - 80",
 	"80 - 90",
-	"90 - 100"
+	"90 - 100",
+	"100+"
 ].map((v: string) =>
 	({ key: v, value: v, text: v }));
 
