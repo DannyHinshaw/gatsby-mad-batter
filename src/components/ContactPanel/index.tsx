@@ -251,6 +251,11 @@ const BLACK_OUT_DATES: string[] = [
 	"8-14-2021",
 	"8-15-2021",
 	"8-16-2021",
+	"8-17-2021",
+	"8-18-2021",
+	"8-19-2021",
+	"8-20-2021",
+	"8-21-2021",
 	"8-22-2021",
 	"8-23-2021",
 	"8-26-2021",
@@ -530,10 +535,10 @@ const useForceUpdate = () => {
 };
 
 export interface IContactPanel {
-	formErrorSet: typeof formErrorSet
-	formDataSet: typeof formDataSet
-	formErrors: IContactFormErrors
-	formData: IContactFormValues
+	formErrorSet: typeof formErrorSet;
+	formDataSet: typeof formDataSet;
+	formErrors: IContactFormErrors;
+	formData: IContactFormValues;
 }
 
 /**
