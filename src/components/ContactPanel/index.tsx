@@ -893,7 +893,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 							Event Date*
 							<br />
 							<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
-								*Blocked out dates on the calendar are already booked*
+								*Blocked out dates on the calendar are fully booked/not available*
 							</span>
 							{picker()}
 						</label>
