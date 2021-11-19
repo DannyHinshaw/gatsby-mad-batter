@@ -353,6 +353,7 @@ const BLACK_OUT_DATES: string[] = [
 	"11-24-2021",
 	"11-25-2021",
 	"11-26-2021",
+	"11-27-2021",
 	"11-28-2021",
 	"11-29-2021",
 	"12-5-2021",
@@ -793,7 +794,7 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 
 	const picker = () =>
 		// @ts-ignore
-		<DateInput readonly={true}
+		<DateInput readonly={true} style={{ marginTop: 0 }}
 		           name="date" dateFormat="MM-DD-YYYY" placeholder="Date" value={props.formData.date}
 		           iconPosition="left" disable={BLACK_OUT_DATES} hideMobileKeyboard={true}
 		           popupPosition="top center" onChange={handleInputChange}
@@ -894,9 +895,17 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 						<label>
 							Event Date*
 							<br />
-							<span style={{ fontSize: ".6rem", fontStyle: "italic" }}>
+							<br />
+							<p style={{ fontSize: ".75rem", fontStyle: "italic" }}>
+								NOTE:
+								<br />
+								<br />
+								MBC will be out on maternity leave mid Jan-April 1st. Keep an eye out on our social media for regular
+								updates and flash sales.
+								<br />
+								<br />
 								*Blocked out dates on the calendar are fully booked/not available*
-							</span>
+							</p>
 							{picker()}
 						</label>
 					</Form.Field>
