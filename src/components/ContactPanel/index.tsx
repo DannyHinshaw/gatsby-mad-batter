@@ -404,6 +404,7 @@ const BLACK_OUT_DATES: string[] = [
 	"1-15-2022",
 	"1-16-2022",
 	"1-17-2022",
+	"1-18-2022",
 
 	// 2022 PREGGERS SCHEDULE
 	"1-19-2022",
