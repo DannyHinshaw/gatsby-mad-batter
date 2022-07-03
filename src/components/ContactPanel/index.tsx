@@ -553,8 +553,10 @@ const BLACK_OUT_DATES: string[] = [
 	"7-1-2022",
 	"7-2-2022",
 	"7-5-2022",
+	"7-6-2022",
 	"7-7-2022",
 	"7-8-2022",
+	"7-9-2022",
 	"7-29-2022",
 	"7-30-2022",
 	"9-9-2022",
@@ -1051,13 +1053,13 @@ const ContactForm: ComponentType<IContactPanel> = (props: IContactPanel): JSX.El
 							<br />
 							<br />
 							<p style={{ fontSize: ".75rem", fontStyle: "italic" }}>
-							{/*	NOTE:*/}
-							{/*	<br />*/}
-							{/*	<br />*/}
-							{/*	MBC will be out on maternity leave mid Jan-April 1st. Keep an eye out on our social media for regular*/}
-							{/*	updates and flash sales.*/}
-							{/*	<br />*/}
-							{/*	<br />*/}
+								{/*	NOTE:*/}
+								{/*	<br />*/}
+								{/*	<br />*/}
+								{/*	MBC will be out on maternity leave mid Jan-April 1st. Keep an eye out on our social media for regular*/}
+								{/*	updates and flash sales.*/}
+								{/*	<br />*/}
+								{/*	<br />*/}
 								*Blocked out dates on the calendar are fully booked/not available*
 							</p>
 							{picker()}
