@@ -35,7 +35,7 @@
     "isomorphic-fetch": "^3.0.0",
     "mailgun-js": "^0.22.0",
     "node-sass": "^4.14.1",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.4.16",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-headroom": "2.2.8",
