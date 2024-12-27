@@ -34,7 +34,7 @@
     "gatsby-transformer-sharp": "^2.5.3",
     "isomorphic-fetch": "^3.0.0",
     "mailgun-js": "^0.22.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "npm:sass@^1.83.0",
     "nodemailer": "^5.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -81,8 +81,5 @@
     "@types/yup": "^0.29.0",
     "netlify-lambda": "^1.1.1",
     "typescript": "^3.9.3"
-  },
-  "resolutions": {
-    "**/**/eslint-utils": "^1.4.1"
   }
 }
